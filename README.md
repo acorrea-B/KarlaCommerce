@@ -4,19 +4,19 @@ Karla accesorios, es un negocio dedicado a la venta de accesorios para damas y c
 KarlaCommerce esta implementado con las siguientes tecnología:
 
 Backend:
-  python 3.8.8
-  Django 3.2.5
-  graphene 2.1.8
-  graphene-django 2.7.0
+  - python 3.8.8
+  - Django 3.2.5
+  - graphene 2.1.8
+  - graphene-django 2.7.0
  
 FrontEnd:
-  Vue 2.6.12
-  apollo-client 2.6.10
+  - Vue 2.6.12
+  - apollo-client 2.6.10
   
 Server:
-  Aws Ec2 ubuntu 20.04
-  Nginx
-  Daphne
+  - Aws Ec2 ubuntu 20.04
+  - Nginx
+  - Daphne
   
  Tiempo estimado de desarrollo: 32 horas
 
