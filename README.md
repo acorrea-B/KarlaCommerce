@@ -17,6 +17,9 @@ Server:
   - Aws Ec2 ubuntu 20.04
   - Nginx
   - Daphne
+
+BD:
+  - postgres
   
  Tiempo estimado de desarrollo: 32 horas
 
