@@ -18,5 +18,5 @@ Server:
   Nginx
   Daphne
   
- Tiempo estimado de desarrollo: 40 horas
+ Tiempo estimado de desarrollo: 32 horas
 
