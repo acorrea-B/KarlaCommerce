@@ -15,14 +15,17 @@ class UserManager(BaseUserManager):
     """
 
     def create_user(self, identification, user_type, first_name, 
-                    last_name, phoneNumber, email, password=None,
+                    last_name, email, phoneNumber = "",password=None,
                     is_admin=False, is_staff=False, is_active=True):
         if not identification:
             raise ValueError("User must have an identification")
-        if not password:
+        if user_type == 3 and not password:
             raise ValueError("User must have a password")
+        if user_type == 3 and not phoneNumber:
+            raise ValueError("User must have a phone Number")
         
-        if(user_type == 3): is_staff = True
+        if user_type == 3: 
+            is_staff = True
 
         user = self.model(
             identification=identification,
@@ -73,7 +76,7 @@ class User(AbstractUser):
     )
     username=None
     #se extiende el modelo de usuarios de django con los campos que se requieren para el comercio
-    phoneNumber=models.CharField(unique=True, max_length=15)
+    phoneNumber=models.CharField(unique=True, max_length=15, blank=True)
     identification=models.CharField(max_length=12, unique=True)
     email=models.CharField(unique=True, max_length=50, blank=True)
     user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES)

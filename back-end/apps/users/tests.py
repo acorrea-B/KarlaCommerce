@@ -30,11 +30,9 @@ class UsersTestCase(TestCase):
         user.save()
         
         user_create = get_user_model().\
-                      objects.get(self.admin.get("identification"))
+                      objects.get(identification = self.admin.get("identification"))
         
         self.assertTrue(user_create)
-        self.assertTrue(user_create.admin)
-        self.assertTrue(user_create.staff)
         self.assertTrue(user_create.is_active)
         self.assertTrue(user_create.is_superuser)
 
@@ -43,23 +41,19 @@ class UsersTestCase(TestCase):
         user = get_user_model().objects.create_user( **self.operator )
         user.save()
         user_create = get_user_model().\
-                      objects.get(self.operator.get("identification"))
+                      objects.get(identification = self.operator.get("identification"))
         
         self.assertTrue(user_create)
-        self.assertFalse(user_create.admin)
-        self.assertTrue(user_create.staff)
         self.assertTrue(user_create.is_active)
         self.assertFalse(user_create.is_superuser)
     
-    def test_create_costumer(self):
-        user = get_user_model().objects.create_user( **self.costumer )
+    def test_create_customer(self):
+        user = get_user_model().objects.create_user( **self.customer )
         user.save()
         user_create = get_user_model().\
-                      objects.get(self.costumer.get("identification"))
+                      objects.get(identification = self.customer.get("identification"))
         
         self.assertTrue(user_create)
-        self.assertFalse(user_create.admin)
-        self.assertFalse(user_create.staff)
         self.assertTrue(user_create.is_active)
         self.assertFalse(user_create.is_superuser)
     
