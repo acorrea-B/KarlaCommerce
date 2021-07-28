@@ -15,18 +15,15 @@ class UsersTestCase(TestCase):
                          "identification":"1231298",
                          "password":"er",
                          "user_type":3,
-                         "is_staff":True,
                          "phoneNumber":"213123123",
                          "email":"asdas@commerce.co"
                         }
         self.customer = {"first_name":"pepito",
-                              "last_name":"perez",
-                              "identification":"3245645",
-                              "password":"er",
-                              "user_type":2,
-                              "phoneNumber":"2131250678",
-                              "email":"asdas@example.com"
-                            }
+                          "last_name":"perez",
+                          "identification":"3245645",
+                          "user_type":2,
+                          "email":"asdas@example.com"
+                        }
 
     def test_create_super_user(self):
         user = get_user_model().objects.create_superuser(**self.admin)
@@ -52,6 +49,18 @@ class UsersTestCase(TestCase):
         self.assertFalse(user_create.admin)
         self.assertTrue(user_create.staff)
         self.assertTrue(user_create.is_active)
-        self.assertTrue(user_create.is_superuser)
+        self.assertFalse(user_create.is_superuser)
+    
+    def test_create_costumer(self):
+        user = get_user_model().objects.create_user( **self.costumer )
+        user.save()
+        user_create = get_user_model().\
+                      objects.get(self.costumer.get("identification"))
+        
+        self.assertTrue(user_create)
+        self.assertFalse(user_create.admin)
+        self.assertFalse(user_create.staff)
+        self.assertTrue(user_create.is_active)
+        self.assertFalse(user_create.is_superuser)
     
     
