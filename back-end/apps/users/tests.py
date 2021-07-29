@@ -3,19 +3,16 @@ from django.contrib.auth import get_user_model
 
 class UsersTestCase(TestCase):
     def setUp(self):
-        self.admin = {"identification" : "1234",
+        self.super_user = {"identification" : "1234",
                       "password" : "pass1234567",
-                      "first_name":"a",
-                      "last_name":"b",
                       "user_type":1,
-                      "phoneNumber":"1256756"
                     } 
         self.operator = {"first_name":"a",
                          "last_name":"b",
                          "identification":"1231298",
                          "password":"er",
                          "user_type":3,
-                         "phoneNumber":"213123123",
+                         "phone_number":"213123123",
                          "email":"asdas@commerce.co"
                         }
         self.customer = {"first_name":"pepito",
@@ -26,11 +23,11 @@ class UsersTestCase(TestCase):
                         }
 
     def test_create_super_user(self):
-        user = get_user_model().objects.create_superuser(**self.admin)
+        user = get_user_model().objects.create_superuser(**self.super_user)
         user.save()
         
         user_create = get_user_model().\
-                      objects.get(identification = self.admin.get("identification"))
+                      objects.get(identification = self.super_user.get("identification"))
         
         self.assertTrue(user_create)
         self.assertTrue(user_create.is_active)

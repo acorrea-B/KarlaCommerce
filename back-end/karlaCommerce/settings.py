@@ -104,7 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 #Configuracion para el funcionamiento de graphene y relay
 GRAPHENE = {
-    'SCHEMA': 'virmo.schema.ROOT_SCHEMA',
+    'SCHEMA': 'apiGraphQl.schema.ROOT_SCHEMA',
     'MIDDLEWARE': [
         'graphql_jwt.middleware.JSONWebTokenMiddleware',
     ],

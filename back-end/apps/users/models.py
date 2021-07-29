@@ -15,13 +15,13 @@ class UserManager(BaseUserManager):
     """
 
     def create_user(self, identification, user_type, first_name, 
-                    last_name, email, phoneNumber = "",password=None,
+                    last_name, email, phone_number = "",password=None,
                     is_admin=False, is_staff=False, is_active=True):
         if not identification:
             raise ValueError("User must have an identification")
         if user_type == 3 and not password:
             raise ValueError("User must have a password")
-        if user_type == 3 and not phoneNumber:
+        if user_type == 3 and not phone_number:
             raise ValueError("User must have a phone Number")
         
         if user_type == 3: 
@@ -31,7 +31,7 @@ class UserManager(BaseUserManager):
             identification=identification,
             first_name = first_name,
             last_name = last_name,
-            phoneNumber = phoneNumber,
+            phone_number = phone_number,
             email = email
         )
         user.user_type = user_type
@@ -44,8 +44,8 @@ class UserManager(BaseUserManager):
         return user
         
     def create_superuser(self, identification, user_type, 
-                         first_name, last_name, password,
-                         phoneNumber = None, **extra_fields):
+                         password, first_name = None, last_name = None, 
+                         phone_number = None, **extra_fields):
         if not identification:
             raise ValueError("User must have an identification")
         if not password:
@@ -53,10 +53,7 @@ class UserManager(BaseUserManager):
 
 
         user = self.model(
-            identification=identification,
-            first_name = first_name,
-            last_name = last_name,
-            phoneNumber = phoneNumber,
+            identification=identification
         )
         user.user_type = user_type
         user.set_password(password)
@@ -76,7 +73,7 @@ class User(AbstractUser):
     )
     username=None
     #se extiende el modelo de usuarios de django con los campos que se requieren para el comercio
-    phoneNumber=models.CharField(unique=True, max_length=15, blank=True)
+    phone_number=models.CharField(unique=True, max_length=15, blank=True)
     identification=models.CharField(max_length=12, unique=True)
     email=models.CharField(unique=True, max_length=50, blank=True)
     user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES)
