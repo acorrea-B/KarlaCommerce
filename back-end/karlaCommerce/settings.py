@@ -103,7 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-#Configuracion para el funcionamiento de graphene y relay
+#Configuracion para el funciónamiento de graphene y relay
 GRAPHENE = {
     'SCHEMA': 'apiGraphQl.schema.ROOT_SCHEMA',
     'MIDDLEWARE': [

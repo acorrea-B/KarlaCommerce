@@ -7,7 +7,7 @@ class Product(models.Model):
     # Nombre del producto
     name = models.CharField(max_length = 200)
     # Valor del producto
-    value = models.DecimalField(max_digits = 10, decimal_places = 2)
+    value = models.IntegerField()
     # Breve descripcion del producto
     description = models.TextField(blank = True)
     # Nombre de la imagen almacenada en S3

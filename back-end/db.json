@@ -1,0 +1,36 @@
+[
+    {
+      "model": "products.Product",
+      "fields": {
+        "name": "Aretes",
+        "value": 15200,
+        "image": "aretes.png",
+        "description":"Aretes de bñados en plata con encrustaciones de piedras hermosas"
+      }
+    },
+    {
+        "model": "products.Product",
+        "fields": {
+          "name": "Anillos de oro",
+          "value": 150999,
+          "image": "anillo.png"
+        }
+    },
+    {
+        "model": "products.Product",
+        "fields": {
+          "name": "Collar de plata",
+          "value": 50999,
+          "image": "collar.png"
+        }
+    },
+    {
+        "model": "products.Product",
+        "fields": {
+          "name": "Manilla",
+          "value": 30999,
+          "image": "Manilla.png",
+          "description":"Manilla para hombre de cuero"
+        }
+    }
+  ]

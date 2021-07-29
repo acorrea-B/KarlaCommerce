@@ -2,7 +2,7 @@ import boto3
 from django.conf import settings
 from botocore.config import Config
 from botocore.exceptions import ClientError
-from .s3Decorator import photo_extension, photo_url
+from .s3Decorator import  photo_url
 
 class Photos:
     """
@@ -28,7 +28,7 @@ class Photos:
     @photo_url
     def get_presigned_url( self, file_name, expiration ):
         """
-            Esta funcion tiene como objetivo obtener una url prefirmada
+            Esta función tiene como objetivo obtener una url prefirmada
             de un objeto que se encuentre almacenado en el bucket de s3, 
             con el fin de no exponer los archivos del bucket y 
             evitar la descarga de los mismos en la raiz del proyecto.
