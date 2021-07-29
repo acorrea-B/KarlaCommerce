@@ -3,7 +3,11 @@ from graphene import ObjectType, Schema
 from graphql_jwt import ObtainJSONWebToken, Refresh, Revoke, Verify
 from graphql_jwt.refresh_token.signals import refresh_token_rotated
 from apps.users.apiGrpalhQl.schema import UserMutation
+from apps.products.apiGraphQl.schema import ProductQuery
 
+
+class Query( ProductQuery, ObjectType):
+    pass
 
 class Mutation( ObjectType, UserMutation ):
     #: el operador debe autenticarse por medio de JWT.
@@ -18,4 +22,4 @@ class Mutation( ObjectType, UserMutation ):
 
 
 
-ROOT_SCHEMA = Schema(mutation=Mutation)
+ROOT_SCHEMA = Schema(query = Query, mutation=Mutation)
