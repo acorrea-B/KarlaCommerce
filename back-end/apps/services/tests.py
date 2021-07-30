@@ -19,7 +19,7 @@ class ApiTpagaTestCase(TestCase):
                                       "user_ip_address":socket.gethostbyname(socket.gethostname()),
                                       "expires_at": self.expiration.isoformat()
                                     }
-    
+
     def test_payment_request(self):
         error, result = Tpaga().payment_requests(self.payment_request_data)
         self.assertFalse(error)
@@ -35,7 +35,17 @@ class ApiTpagaTestCase(TestCase):
         self.assertEqual(result.status_code, 200)
         data = result.text
         self.assertIn("token", data)
-    
-   
+    """
+    Se comenta esta prueba debido a que no se puede 
+    emular el pago durante el tiempo de ejcucion de los test
+    solo se debe correr cuando se cuente con un token de un pago realizado
+    def test_payment_refund(self):
+        error, result = Tpaga().payment_requests(self.payment_request_data)
+        data = result.json()
+        error, result = Tpaga().payment_refund("pr-3fbec67b8711a715e72151469f6f6cd558f39a09950a6241d4e379383435cc2f8af7ac65")
+        self.assertFalse(error)
+        self.assertEqual(result.status_code, 200)
+        data = result.text
+        self.assertIn("token", data)"""
     
 
