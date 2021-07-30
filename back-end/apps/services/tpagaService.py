@@ -6,17 +6,10 @@ from apps.logger.manager import ManagerLogging
 
 class Tpaga:
     def __init__(self):
-        self.commerce = settings.COMMERCE
-        self.password = settings.PASSWORDCOMMERCE
         self.url = "https://stag.wallet.tpaga.co/merchants/api/v1/"
-        self.auth = HTTPBasicAuth(self.commerce, self.password)
+        self.auth = HTTPBasicAuth(settings.COMMERCE, settings.PASSWORDCOMMERCE)
         self.loggin = ManagerLogging().get_logger()
         
-    def get_session(self):
-        session = requests.Session()
-        session.aut = (self.commerce, self.password)
-        return session
-
     def payment_requests(self, data):
         error = {"status": 400,
                     "message":"""!Ooops no pudimos procesar el pago¡ 
@@ -31,6 +24,7 @@ class Tpaga:
             self.logging.error(e, extra = { "info": self.payment_requests.__name__})
             return error
         except requests.exceptions.HTTPError as e:
+            self.logging.info(e, extra = { "info": self.payment_requests.__name__})
             return e, None
         except requests.exceptions.ConnectionError as e:
             self.logging.error(e, extra = { "info": self.payment_requests.__name__})
@@ -51,19 +45,41 @@ class Tpaga:
                                         auth = self.auth
                                     )
         except requests.exceptions.RequestException as e:
-            self.logging.error(e, extra = { "info": self.payment_requests.__name__})
+            self.logging.error(e, extra = { "info": self.payment_requests_info.__name__})
             return error
         except requests.exceptions.HTTPError as e:
+            self.logging.info(e, extra = { "info": self.payment_requests_info.__name__})
             return e, None
         except requests.exceptions.ConnectionError as e:
-            self.logging.error(e, extra = { "info": self.payment_requests.__name__})
+            self.logging.error(e, extra = { "info": self.payment_requests_info.__name__})
             return error
         except requests.exceptions.Timeout as e:
-            self.logging.info(e, extra = { "info": self.payment_requests.__name__})
+            self.logging.info(e, extra = { "info": self.payment_requests_info.__name__})
             return error
         else:
             return None, response
 
-    def payment_requests_refund(self):
-        pass
-
+    def payment_refund(self, token):
+        error = {"status": 400,
+                    "message":"""!Ooops no pudimos reembolsar el pago¡ 
+                                  Intentalo de nuevo en un momento""" 
+                }, None
+        try:
+            response = requests.post(self.url + "payment_requests/refund", 
+                                        auth=self.auth,
+                                        data = {"payment_request_token":token}
+                                    )
+        except requests.exceptions.RequestException as e:
+            self.logging.error(e, extra = { "info": self.payment_refund.__name__})
+            return error
+        except requests.exceptions.HTTPError as e:
+            self.logging.info(e, extra = { "info": self.payment_refund.__name__})
+            return e, None
+        except requests.exceptions.ConnectionError as e:
+            self.logging.error(e, extra = { "info": self.payment_refund.__name__})
+            return error
+        except requests.exceptions.Timeout as e:
+            self.logging.info(e, extra = { "info": self.payment_refund.__name__})
+            return error
+        else:
+            return None, response
