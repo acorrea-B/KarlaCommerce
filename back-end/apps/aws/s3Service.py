@@ -3,6 +3,7 @@ from django.conf import settings
 from botocore.config import Config
 from botocore.exceptions import ClientError
 from .s3Decorator import  photo_url
+from apps.logger.manager import ManagerLogging
 
 class Photos:
     """
@@ -11,7 +12,7 @@ class Photos:
     """
 
     def __init__( self, logging ):
-        self.logging = logging
+        self.logging = ManagerLogging().get_logger()
         self.bucket =  settings.IMAGES_BUCKET
         self.s3_client = self.s3_django_connection()
     
