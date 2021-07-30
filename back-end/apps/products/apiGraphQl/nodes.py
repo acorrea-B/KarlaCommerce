@@ -2,7 +2,7 @@ import graphene
 from graphene_django import DjangoObjectType
 from ..models import Product
 from apps.aws.s3Service import Photos
-from apps.logger.manager import ManagerLogging
+
 
 class ProductNode(DjangoObjectType):
     """
@@ -23,7 +23,7 @@ class ProductNode(DjangoObjectType):
             por la url de la misma que se encuentra en s3
         """
         print(self.value)
-        url = Photos(ManagerLogging().get_logger()).get_presigned_url(self.image, 800)
+        url = Photos().get_presigned_url(self.image, 800)
         if type(url) == str:
             return url
         return ""

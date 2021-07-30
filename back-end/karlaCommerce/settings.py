@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'apps',
     'apps.users',
     'apps.products',
+    'apps.services'
 ]
 
 MIDDLEWARE = [
@@ -143,3 +144,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOG = 'DEBUG'
 IMAGES_BUCKET="karla-products"
 AUTH_USER_MODEL = 'users.User'
+COMMERCE = "backend-alejandro-correa"
+PASSWORDCOMMERCE = "sTbkfTmG7wNrRn78"
