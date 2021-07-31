@@ -1,11 +1,23 @@
-import uuid
+import datetime
 import socket
 from django.test import TestCase
 from .payment import PaymentTransactions
-
+from apps.purchases.models import PurchaseModel
 class PaymentTransactionsTestCase(TestCase):
     def setUp(self):
-        self.purchase = {"purchase_id":str(uuid.uuid4().hex),
+        self.purchase = {"purchase":PurchaseModel( total_value = 124236,
+                                                   products = [
+                                                                {
+                                                                    "name": "Aretes",
+                                                                    "value": "6490"
+                                                                },
+                                                                {
+                                                                    "name": "Manilla",
+                                                                    "value": "6.000"
+                                                                }
+                                                            ],
+                                                    purchase_date = datetime.datetime.utcnow()
+                                                 ),
                          "value":124236,
                          "client_ip": socket.gethostbyname(socket.gethostname())
                         }

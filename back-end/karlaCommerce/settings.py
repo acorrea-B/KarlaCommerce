@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'apps.products',
     'apps.services',
     'apps.transactions',
+    'apps.purchases',
 ]
 
 MIDDLEWARE = [
@@ -147,4 +148,4 @@ IMAGES_BUCKET="karla-products"
 AUTH_USER_MODEL = 'users.User'
 COMMERCE = "backend-alejandro-correa"
 PASSWORDCOMMERCE = "sTbkfTmG7wNrRn78"
-WEBCLIENT = "https://www.youtube.com/"
+WEBCLIENT = "https://www.youtube.com/?transaction="

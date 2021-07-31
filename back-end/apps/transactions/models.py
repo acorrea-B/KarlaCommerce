@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 from django.contrib.auth import get_user_model 
+from apps.purchases.models import PurchaseModel
 User = get_user_model()
 
 class TransactionModel(models.Model):
@@ -26,3 +27,10 @@ class TransactionModel(models.Model):
                                     null=True,
                                     blank = True
                                     )
+    # Compra que paga en la transaccion
+    purchase = models.ForeignKey(  PurchaseModel,
+                                    on_delete=models.CASCADE,
+                                    null=True,
+                                    blank = True
+                                 )
+
