@@ -10,8 +10,21 @@ class PaymentTransactionsTestCase(TestCase):
                          "client_ip": socket.gethostbyname(socket.gethostname())
                         }
     def test_payment_request(self):
-        error, result = PaymentTransactions().payment_request(**self.purchase)
+        error, payment, transaction = PaymentTransactions().\
+                                      payment_transaction_request(**self.purchase)
         self.assertFalse(error)
-        self.assertTrue(result)
-        self.assertIn(result["tpaga_payment_url"])
-        self.assertIn(result["token"])
+        self.assertTrue(payment)
+        self.assertIn("tpaga_payment_url", payment)
+        self.assertIn("token", payment)
+        self.assertEquals(transaction.token, payment["token"])
+
+    def test_payment_transaction_state(self):
+        error, payment, transaction = PaymentTransactions().\
+                                      payment_transaction_request(**self.purchase)
+        self.assertFalse(error)
+        error, transaction_created =  PaymentTransactions().\
+                                     payment_transaction_state(transaction.id)
+        self.assertFalse(error)
+        self.assertEquals(transaction_created.state, transaction.state)
+
+       
