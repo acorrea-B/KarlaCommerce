@@ -6,7 +6,8 @@ User = get_user_model()
 
 class TransactionModel(models.Model):
     # Identificador unico de la transacción
-    id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
+    id = models.UUIDField(primary_key = True, verbose_name="Transaction",
+                          default = uuid.uuid4, editable = False)
     # Valor de la transaccion
     value = models.IntegerField()
     # Estado de la transacción
@@ -30,7 +31,7 @@ class TransactionModel(models.Model):
     # Compra que paga en la transaccion
     purchase = models.ForeignKey(  PurchaseModel,
                                     on_delete=models.CASCADE,
-                                    null=True,
-                                    blank = True
+                                    null=True, default=None,
+                                    verbose_name="Purchases"
                                  )
 

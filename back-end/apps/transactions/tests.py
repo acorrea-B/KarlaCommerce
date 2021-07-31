@@ -3,10 +3,11 @@ import socket
 from django.test import TestCase
 from .payment import PaymentTransactions
 from apps.purchases.models import PurchaseModel
+
 class PaymentTransactionsTestCase(TestCase):
     def setUp(self):
-        self.purchase = {"purchase":PurchaseModel( total_value = 124236,
-                                                   products = [
+        self.costumer = PurchaseModel( total_value = 124236,
+                                      products = [
                                                                 {
                                                                     "name": "Aretes",
                                                                     "value": "6490"
@@ -17,11 +18,15 @@ class PaymentTransactionsTestCase(TestCase):
                                                                 }
                                                             ],
                                                     purchase_date = datetime.datetime.utcnow()
-                                                 ),
+                                                 )
+        self.purchase = {
                          "value":124236,
                          "client_ip": socket.gethostbyname(socket.gethostname())
                         }
+
     def test_payment_request(self):
+        self.costumer.save()
+        self.purchase["purchase"] = self.costumer
         error, payment, transaction = PaymentTransactions().\
                                       payment_transaction_request(**self.purchase)
         self.assertFalse(error)
@@ -31,12 +36,13 @@ class PaymentTransactionsTestCase(TestCase):
         self.assertEquals(transaction.token, payment["token"])
 
     def test_payment_transaction_state(self):
+        self.costumer.save()
+        self.purchase["purchase"] = self.costumer
         error, payment, transaction = PaymentTransactions().\
                                       payment_transaction_request(**self.purchase)
         self.assertFalse(error)
         error, transaction_created =  PaymentTransactions().\
-                                     payment_transaction_state(transaction.id)
+                                       payment_transaction_state(transaction.id)
         self.assertFalse(error)
         self.assertEquals(transaction_created.state, transaction.state)
-
-       
+        

@@ -36,6 +36,7 @@ class PaymentTransactions:
                                            purchase = purchase,
                                            creation_date = datetime.datetime.utcnow()
                                           )
+        
         expiration = new_transaction.creation_date + datetime.timedelta(minutes=25)
         self.request["cost"] = value                  
         self.request["idempotency_token"] = new_transaction.id                  
