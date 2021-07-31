@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
+from .usersManager import UserManager
 
 class UsersTestCase(TestCase):
     def setUp(self):
@@ -21,6 +22,11 @@ class UsersTestCase(TestCase):
                           "user_type":2,
                           "email":"asdas@example.com"
                         }
+        self.customer_create = {"first_name":"pepito",
+                                "last_name":"perez",
+                                "identification":"3245645",
+                                "email":"asdas@example.com"
+                            }
 
     def test_create_super_user(self):
         user = get_user_model().objects.create_superuser(**self.super_user)
@@ -49,6 +55,22 @@ class UsersTestCase(TestCase):
         user.save()
         user_create = get_user_model().\
                       objects.get(identification = self.customer.get("identification"))
+        
+        self.assertTrue(user_create)
+        self.assertTrue(user_create.is_active)
+        self.assertFalse(user_create.is_superuser)
+    
+    def test_get_or_create_costumer_create(self):
+        user = UserManager().get_or_create_costumer( **self.customer_create )
+        self.assertTrue(user)
+        self.assertTrue(user.is_active)
+        self.assertFalse(user.is_superuser)
+    
+    def test_get_or_create_costumer_get(self):
+        user = get_user_model().objects.create_user( **self.customer )
+        user.save()
+        user_create = UserManager().\
+                      get_or_create_costumer(**self.customer_create)
         
         self.assertTrue(user_create)
         self.assertTrue(user_create.is_active)
