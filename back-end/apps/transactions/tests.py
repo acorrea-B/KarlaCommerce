@@ -6,7 +6,7 @@ from apps.purchases.models import PurchaseModel
 
 class PaymentTransactionsTestCase(TestCase):
     def setUp(self):
-        self.costumer = PurchaseModel( total_value = 124236,
+        self.purchase = PurchaseModel( total_value = 124236,
                                       products = [
                                                                 {
                                                                     "name": "Aretes",
@@ -17,16 +17,16 @@ class PaymentTransactionsTestCase(TestCase):
                                                                     "value": "6.000"
                                                                 }
                                                             ],
-                                                    purchase_date = datetime.datetime.utcnow()
-                                                 )
+                                        purchase_date = datetime.datetime.utcnow()
+                                    )
         self.purchase = {
                          "value":124236,
                          "client_ip": socket.gethostbyname(socket.gethostname())
                         }
 
     def test_payment_request(self):
-        self.costumer.save()
-        self.purchase["purchase"] = self.costumer
+        self.purchase.save()
+        self.purchase["purchase"] = self.purchase
         error, payment, transaction = PaymentTransactions().\
                                       payment_transaction_request(**self.purchase)
         self.assertFalse(error)
@@ -36,8 +36,8 @@ class PaymentTransactionsTestCase(TestCase):
         self.assertEquals(transaction.token, payment["token"])
 
     def test_payment_transaction_state(self):
-        self.costumer.save()
-        self.purchase["purchase"] = self.costumer
+        self.purchase.save()
+        self.purchase["purchase"] = self.purchase
         error, payment, transaction = PaymentTransactions().\
                                       payment_transaction_request(**self.purchase)
         self.assertFalse(error)

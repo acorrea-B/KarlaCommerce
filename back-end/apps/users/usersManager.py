@@ -19,7 +19,7 @@ class UserManager:
         """
         try:
             costumer = get_user_model().\
-                    objects.get(identification = identification)
+                       objects.get(identification = identification)
         except get_user_model().DoesNotExist:
             costumer = get_user_model().\
                       objects.create_user(user_type = 2,
