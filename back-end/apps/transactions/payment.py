@@ -99,5 +99,26 @@ class PaymentTransactions:
         return {}, transaction
 
 
-    def payment_refund(self):
-        pass
+    def payment_transaction_refund(self, transaction_id, operator):
+        """
+            payment_transaction_state esta función se encarga de obtener
+            y retornar el estado actualizado de una transacción de pago,
+            en el caso tal de que haya una respuesta de la API de Tpaga
+            de lo contrario retornara el correspondiente error
+            Argumentos:
+                transaction_id(str) - identificador de la transaccion que se requiere el estado
+                operator(User) - operador que realizo el reembolso
+            Retorna:
+                error(dict - None)
+                transaction(TransactionModel - None)
+        """
+        transaction = TransactionModel.objects.get(id = transaction_id)
+        error, result = self.service.payment_refund(transaction.token)
+        if not error:
+            result = result.json()
+            transaction.state = result.get("status") 
+            transaction.operator = operator
+            transaction.close_date = datetime.datetime.utcnow()
+            return {}, transaction
+        else: 
+            return error, None

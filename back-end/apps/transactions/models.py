@@ -1,5 +1,7 @@
 import uuid
 from django.db import models
+from django.contrib.auth import get_user_model 
+User = get_user_model()
 
 class TransactionModel(models.Model):
     # Identificador unico de la transacción
@@ -18,3 +20,9 @@ class TransactionModel(models.Model):
     expiration_date = models.DateField(blank = True)
     # Direccion ip desde la cual se solicita la transacción
     client_ip = models.CharField(max_length=25)
+    # Operador que realiza el reembolso
+    operator = models.OneToOneField( User,
+                                    on_delete=models.CASCADE,
+                                    null=True,
+                                    blank = True
+                                    )
