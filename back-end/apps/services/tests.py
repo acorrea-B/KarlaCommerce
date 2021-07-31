@@ -1,8 +1,6 @@
 import datetime
 import socket
 import uuid
-from unittest import result
-from django.http import response
 from django.test import TestCase
 from .tpagaService import Tpaga
 
