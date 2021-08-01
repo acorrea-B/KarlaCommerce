@@ -11,13 +11,12 @@ class PurchasesNode(DjangoObjectType):
         __all_
     
     """
-    products = generic.GenericScalar()
     class Meta:
 
         model = PurchaseModel
         interfaces = (graphene.relay.Node,)
 
-class PaymentNode(DjangoObjectType):
+class PaymentNode(graphene.ObjectType):
     #: Link de pago de la billetera Tpaga
     tpaga_payment_url = graphene.String()
     #: Fecha de expiracion del link

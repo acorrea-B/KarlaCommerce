@@ -4,9 +4,9 @@ from graphql_jwt import ObtainJSONWebToken, Refresh, Revoke, Verify
 from graphql_jwt.refresh_token.signals import refresh_token_rotated
 from apps.users.apiGrpalhQl.schema import UserMutation
 from apps.products.apiGraphQl.schema import ProductQuery
-from apps.purchases.apiGraphQl.schema import PurchaseMutation
+from apps.purchases.apiGraphQl.schema import PurchaseMutation, PurchaseQuery
 
-class Query( ProductQuery, ObjectType):
+class Query( ProductQuery, PurchaseQuery, ObjectType):
     pass
 
 class Mutation( ObjectType, UserMutation, PurchaseMutation ):

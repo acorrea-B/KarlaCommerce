@@ -1,3 +1,5 @@
+import uuid
+import base64
 from apps.products.models import PurchaseProduct, Product
 
 class ProductPruchase:
@@ -16,15 +18,24 @@ class ProductPruchase:
         """
         products = []
         for item in products_purchase:
+            id = ""
+            if isinstance(item.get("product_id", ""), str):
+                product_id = base64.b64decode(item.get("product_id", "")).decode("utf8").split(':')[1]
+                id =  uuid.UUID(product_id)
+            else:
+                id =  item.get("product_id", "")
+                
+            
             try: 
-                product = Product.objects.get(id = item.get("product_id", ""))
+                print(type(id))
+                result = Product.objects.get(id = id)
             except Product.DoesNotExist:
                 return { "status": 400,
                             "message": """El producto elegido no se encuentra en 
                                             nuestro inventario, intenta lo de nuevo con otro productos"""
                             },[]
             else:
-                purchase_product = PurchaseProduct(product = product, amount=item.get("amount"))
+                purchase_product = PurchaseProduct(product = result, amount=item.get("amount"))
                 purchase_product.save()
                 products.append(purchase_product)
         return None, products

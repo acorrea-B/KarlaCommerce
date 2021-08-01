@@ -1,6 +1,6 @@
 import datetime
 from apps.transactions.models import TransactionModel 
-from services.tpagaService import Tpaga
+from apps.services.tpagaService import Tpaga
 from django.conf import settings
 
 
@@ -9,9 +9,8 @@ class PaymentTransactions:
     def __init__(self):
         self.service = Tpaga()
         self.request = { "terminal_id":"Karla e-commerce",
-                         "purchase_description":"""Gracias por comprar en Karla Accesorios, a continuación,
-                                                   encontraras el valor de tu compra.
-                                                """
+                         "purchase_description":"Gracias por comprar en Karla Accesorios, a continuación,\
+                                                   encontraras el valor de tu compra."
                        }
 
     def payment_transaction_request(self, value, purchase, client_ip):

@@ -13,7 +13,7 @@ class PurchaseModel(models.Model):
     # Listado de productos
     products = models.ManyToManyField(PurchaseProduct)
     # Cliente que realizo la compra
-    costumer = models.OneToOneField( User,
+    costumer = models.ForeignKey( User,
                                      on_delete=models.CASCADE,
                                      null=True,
                                      blank = True
