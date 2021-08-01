@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 from django.contrib.auth import get_user_model 
+from apps.products.models import PurchaseProduct
 
 User = get_user_model()
 
@@ -10,7 +11,7 @@ class PurchaseModel(models.Model):
     # Valor total de la compra
     total_value = models.IntegerField()
     # Listado de productos
-    products = models.JSONField()
+    products = models.ManyToManyField(PurchaseProduct)
     # Cliente que realizo la compra
     costumer = models.OneToOneField( User,
                                      on_delete=models.CASCADE,

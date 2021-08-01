@@ -1,9 +1,11 @@
+from logging import error
 from apps.transactions.models import TransactionModel
 import datetime
 from apps.purchases.models import PurchaseModel
 from apps.transactions.payment import PaymentTransactions
 from apps.users.usersManager import UserManager
 from apps.purchases.models import PurchaseModel
+
 
 class Purchases:
     
@@ -20,17 +22,18 @@ class Purchases:
                 client_ip(str) - ip desde la cual se realiza la compra
             Retorna:
                 error(dict - None)
-                transaction(TransactionModel - None)
+                payment(dict - None)
+                purchase(PurchaseModel - None)
         """
         costumer = UserManager().\
                     get_or_create_costumer(**user_data)
         purchase = PurchaseModel( total_value = total_value,
-                                  products = products,
                                   costumer = costumer,
                                   state = "pending",
                                   purchase_date = datetime.datetime.utcnow()
                                 )
         purchase.save()
+        purchase.products.add(*products)
         error, payment, transaction = PaymentTransactions().\
                                       payment_transaction_request( purchase = purchase,
                                                                    value = total_value,
@@ -99,5 +102,8 @@ class Purchases:
         else:
             return error, None
         
+    
+                        
+
 
         

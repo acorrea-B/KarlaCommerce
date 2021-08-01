@@ -13,3 +13,8 @@ class Product(models.Model):
     # Nombre de la imagen almacenada en S3
     image = models.CharField(max_length = 200)
 
+class PurchaseProduct(models.Model):
+    # Producto agregado a la compra
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,)
+    # Cantidad del porducto agregado a la compra
+    amount = models.IntegerField()
