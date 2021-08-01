@@ -13,11 +13,16 @@ class PurchaseModel(models.Model):
     products = models.JSONField()
     # Cliente que realizo la compra
     costumer = models.OneToOneField( User,
-                                    on_delete=models.CASCADE,
-                                    null=True,
-                                    blank = True
+                                     on_delete=models.CASCADE,
+                                     null=True,
+                                     blank = True
                                     )
     # Fecha de la compra 
     purchase_date = models.DateField()
+    # Fecha de la confirmación de la compra 
+    purchase_confirmation_date = models.DateField(null=True,
+                                                   blank = True)
+    # Estado de la compra
+    state = models.CharField(max_length = 50)
 
 

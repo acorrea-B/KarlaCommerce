@@ -11,7 +11,7 @@ class TransactionModel(models.Model):
     # Valor de la transaccion
     value = models.IntegerField()
     # Estado de la transacción
-    state = models.CharField(max_length = 200)
+    state = models.CharField(max_length = 50)
     # Token de la transacción
     token = models.CharField(blank = True, max_length = 250)
     # Fecha de creación de la transacción

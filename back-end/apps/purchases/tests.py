@@ -21,13 +21,25 @@ class PurchasesTestCase(TestCase):
         self.total_value = 124236
         self.client_ip = socket.gethostbyname(socket.gethostname())
     
-    def test_new_purchase(self):
-        error, payment, transaction = Purchases().\
-                                      new_purchase(self.customer, self.products, 
+    def test_new_purchase_payment(self):
+        error, payment, purchase = Purchases().\
+                                      new_purchase_payment(self.customer, self.products, 
                                                     self.total_value, self.client_ip
                                                   )
         self.assertFalse(error)
         self.assertIn("tpaga_payment_url", payment)
         self.assertIn("token", payment)
-        self.assertEquals(transaction.token, payment["token"])
+        self.assertIn("tpaga_payment_url", payment)
+        self.assertEquals(purchase.state, "pending")
+    
+    def test_confirm_purchase_payment(self):
+        error, payment, purchase = Purchases().\
+                                    new_purchase_payment(self.customer, self.products, 
+                                                            self.total_value, self.client_ip
+                                                            )
+        error, puchase_info = Purchases().\
+                              confirm_purchase_payment( purchase.id )
+        self.assertFalse(error)
+        self.assertEquals(puchase_info.state, "created")
+        
         
