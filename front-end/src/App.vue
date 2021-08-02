@@ -1,12 +1,21 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app"
+  class="h-100"
+  >
+    <component :is="layout">
+      <router-view />
+    </component>
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import { watch } from '@vue/composition-api'
+import store from '@/store'
+import { localize } from 'vee-validate'
+import es from 'vee-validate/dist/locale/es.json'
+
+localize('es', es)
 
 export default {
   name: 'App',

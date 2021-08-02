@@ -2,6 +2,9 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from "vuex-persistedstate"
 import SecureLS from "secure-ls"
+import products from './products'
+import purchases from './purchases'
+import operator from './operator'
 // Modules
 
 var ls = new SecureLS({
@@ -14,6 +17,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     modules: {
+        products,
+        purchases,
+        operator
     },
     plugins: [createPersistedState(
       {
