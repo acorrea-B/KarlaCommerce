@@ -92,15 +92,21 @@ class Purchases:
         """
         purchase = PurchaseModel.objects.get( id = purchase_id)
         transaction = TransactionModel.objects.filter(purchase = purchase_id ).last()
-        error, refund_transaction = PaymentTransactions().\
-                                    payment_transaction_refund(transaction,
-                                                               operator)
-        if not error:
-            purchase.state = refund_transaction.state
-            purchase.save()
-            return {}, purchase
+        if transaction.state == "paid":
+            error, refund_transaction = PaymentTransactions().\
+                                        payment_transaction_refund(transaction,
+                                                                operator)
+            if not error:
+                purchase.state = refund_transaction.state
+                purchase.save()
+                return {}, purchase
+            else:
+                return error, None
         else:
-            return error, None
+            return {"status": 400,
+                    "message":"!opsss¡ no puedes reembolsar el dinero de esta compra porque aun no han realizado el pago"
+                    }, None
+
         
     
                         

@@ -1,5 +1,6 @@
-from apps import purchases
 import graphene
+import uuid
+import base64
 from .nodes import PurchasesNode, PaymentNode
 from .inputs import CostumerPurchaseInput, ProductPurchase 
 from apiGraphQl.nodes import ErrorNode
@@ -17,7 +18,6 @@ class NewPurchase(graphene.relay.ClientIDMutation):
         products = graphene.List(ProductPurchase, required = True)
         total_value = graphene.Int(required=True)
 
-    #@login_required
     def mutate_and_get_payload(cls, root, **input):
         # Obtienen la ip del cliente
         x_forwarded_for = root.context.META.get('HTTP_X_FORWARDED_FOR')
@@ -38,3 +38,23 @@ class NewPurchase(graphene.relay.ClientIDMutation):
             return NewPurchase(purchase = purchase, payment = payment, error = error)
         else:
             return NewPurchase(purchase = None, payment = None, error = error)
+
+
+class RefundPaymentPurchase(graphene.relay.ClientIDMutation):
+    
+    purchase = graphene.Field(PurchasesNode)
+    error = graphene.Field(ErrorNode)
+    class Input:
+        purchase_id = graphene.String(required=True)
+        
+    @login_required
+    def mutate_and_get_payload(self, info, **input):
+        # Registra una nueva compra
+        product_id = base64.b64decode(input.get("purchase_id")).decode("utf8").split(':')[1]
+        id =  uuid.UUID(product_id)
+        error, purchase = Purchases().refund_purchase( purchase_id = id,
+                                                        operator = info.context.user)
+        if not error:   
+            return NewPurchase(purchase = purchase, error = error)
+        else:
+            return NewPurchase(purchase = None, error = error)
