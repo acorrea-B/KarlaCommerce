@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'apps.products',
     'apps.services',
     'apps.transactions',
+    'apps.purchases',
 ]
 
 MIDDLEWARE = [
@@ -74,7 +75,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'karlaCommerce.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -147,4 +147,4 @@ IMAGES_BUCKET="karla-products"
 AUTH_USER_MODEL = 'users.User'
 COMMERCE = "backend-alejandro-correa"
 PASSWORDCOMMERCE = "sTbkfTmG7wNrRn78"
-WEBCLIENT = "https://www.youtube.com/"
+WEBCLIENT = "https://www.youtube.com/?transaction="

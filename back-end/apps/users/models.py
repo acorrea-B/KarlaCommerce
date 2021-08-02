@@ -73,7 +73,7 @@ class User(AbstractUser):
     )
     username=None
     #se extiende el modelo de usuarios de django con los campos que se requieren para el comercio
-    phone_number=models.CharField(unique=True, max_length=15, blank=True)
+    phone_number=models.CharField( max_length=15, blank=True)
     identification=models.CharField(max_length=12, unique=True)
     email=models.CharField(unique=True, max_length=50, blank=True)
     user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES)

@@ -1,15 +1,17 @@
 import uuid
 from django.db import models
 from django.contrib.auth import get_user_model 
+from apps.purchases.models import PurchaseModel
 User = get_user_model()
 
 class TransactionModel(models.Model):
     # Identificador unico de la transacción
-    id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
+    id = models.UUIDField(primary_key = True, verbose_name="Transaction",
+                          default = uuid.uuid4, editable = False)
     # Valor de la transaccion
     value = models.IntegerField()
     # Estado de la transacción
-    state = models.CharField(max_length = 200)
+    state = models.CharField(max_length = 50)
     # Token de la transacción
     token = models.CharField(blank = True, max_length = 250)
     # Fecha de creación de la transacción
@@ -26,3 +28,10 @@ class TransactionModel(models.Model):
                                     null=True,
                                     blank = True
                                     )
+    # Compra que paga en la transaccion
+    purchase = models.ForeignKey(  PurchaseModel,
+                                    on_delete=models.CASCADE,
+                                    null=True, default=None,
+                                    verbose_name="Purchases"
+                                 )
+

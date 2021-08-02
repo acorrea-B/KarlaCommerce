@@ -11,7 +11,7 @@ class CreateUserOperator(graphene.relay.ClientIDMutation):
     class Input:
         operator = graphene.Argument(UserOperatorInput, required=True)
 
-    #@login_required
+    @login_required
     def mutate_and_get_payload(cls, root, **input):
         # Registra un usuario operador en la base de datos.
         user_data = input.get("operator")

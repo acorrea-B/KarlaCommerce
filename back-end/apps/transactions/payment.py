@@ -1,6 +1,6 @@
 import datetime
 from apps.transactions.models import TransactionModel 
-from services.tpagaService import Tpaga
+from apps.services.tpagaService import Tpaga
 from django.conf import settings
 
 
@@ -8,14 +8,12 @@ class PaymentTransactions:
     
     def __init__(self):
         self.service = Tpaga()
-        self.request = { "purchase_details_url":settings.WEBCLIENT,
-                         "terminal_id":"Karla e-commerce",
-                         "purchase_description":"""Gracias por comprar en Karla Accesorios, a continuación,
-                                                   encontraras el valor de tu compra.
-                                                """
+        self.request = { "terminal_id":"Karla e-commerce",
+                         "purchase_description":"Gracias por comprar en Karla Accesorios, a continuación,\
+                                                   encontraras el valor de tu compra."
                        }
 
-    def payment_transaction_request(self, value, purchase_id, client_ip):
+    def payment_transaction_request(self, value, purchase, client_ip):
         """
             payment_transaction_request esta función se encarga de crear 
             una nueva transacción cada vez que se realiza una solicitud
@@ -24,20 +22,25 @@ class PaymentTransactions:
             la respuesta de la api junto con transaccion, si se presenta un
             error en la solicitud a la api se retornara el correspondiente error
             Argumentos:
-                transaction_id(str) - identificador de la transaccion que se requiere el estado
+                value(str) - valor de la compra
+                purchase(Purchase) - compra a pagar
+                client_ip(str) - ip del dispositivo que hace la solicitud
             Retorna:
                 error(dict - None)
                 request_payment_response(dict - {})
                 transaction(TransactionModel - None)
         """
         new_transaction = TransactionModel(value = value,
-                                      state = "pending",
-                                      creation_date = datetime.datetime.utcnow()
-                                      )
+                                           state = "pending",
+                                           purchase = purchase,
+                                           creation_date = datetime.datetime.utcnow()
+                                          )
+        
         expiration = new_transaction.creation_date + datetime.timedelta(minutes=25)
         self.request["cost"] = value                  
         self.request["idempotency_token"] = new_transaction.id                  
-        self.request["order_id"] = purchase_id                 
+        self.request["purchase_details_url"]= settings.WEBCLIENT + str(new_transaction.purchase.id)   
+        self.request["order_id"] = purchase.id                 
         self.request["user_ip_address"] = client_ip                 
         self.request["expires_at"] = expiration.isoformat()                
         error, response = self.service.payment_requests(self.request)
@@ -54,19 +57,18 @@ class PaymentTransactions:
 
 
 
-    def payment_transaction_state(self, transaction_id):
+    def payment_transaction_state(self, transaction):
         """
             payment_transaction_state esta función se encarga de obtener
             y retornar el estado actualizado de una transacción de pago,
             en el caso tal de que haya una respuesta de la API de Tpaga
             de lo contrario retornara el correspondiente error
             Argumentos:
-                transaction_id(str) - identificador de la transaccion que se requiere el estado
+                transaction(Transaction) - transaccion de la cual se requiere el estado actualizado
             Retorna:
                 error(dict - None)
                 transaction(TransactionModel - None)
         """
-        transaction = TransactionModel.objects.get(id = transaction_id)
         error, result = self.service.payment_requests_info(transaction.token)
         if not error:
             return self.validate_payment(transaction, result.json())
@@ -99,20 +101,19 @@ class PaymentTransactions:
         return {}, transaction
 
 
-    def payment_transaction_refund(self, transaction_id, operator):
+    def payment_transaction_refund(self, transaction, operator):
         """
             payment_transaction_state esta función se encarga de obtener
             y retornar el estado actualizado de una transacción de pago,
             en el caso tal de que haya una respuesta de la API de Tpaga
             de lo contrario retornara el correspondiente error
             Argumentos:
-                transaction_id(str) - identificador de la transaccion que se requiere el estado
+                transaction(TransactionModel) - transaccion que se reembolsara
                 operator(User) - operador que realizo el reembolso
             Retorna:
                 error(dict - None)
                 transaction(TransactionModel - None)
         """
-        transaction = TransactionModel.objects.get(id = transaction_id)
         error, result = self.service.payment_refund(transaction.token)
         if not error:
             result = result.json()

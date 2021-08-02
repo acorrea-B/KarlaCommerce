@@ -11,7 +11,7 @@ class Photos:
         con el proyecto, mediante el cliente de boto3
     """
 
-    def __init__( self, logging ):
+    def __init__( self ):
         self.logging = ManagerLogging().get_logger()
         self.bucket =  settings.IMAGES_BUCKET
         self.s3_client = self.s3_django_connection()
