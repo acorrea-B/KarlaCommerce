@@ -9,29 +9,23 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import { watch } from '@vue/composition-api'
-import store from '@/store'
+
 import { localize } from 'vee-validate'
 import es from 'vee-validate/dist/locale/es.json'
+
+
+const LayoutFull = () => import('@/layouts/LayoutDefault')
 
 localize('es', es)
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    LayoutFull,
+  },computed:{
+      layout() {
+       return 'layout-full'
+    }
+    }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
