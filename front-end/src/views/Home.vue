@@ -5,11 +5,9 @@
         <div
           class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-3"
         >
-          <Product
-            v-for="product in products"
-            :product="product"
-            :key="product.id"
-          />
+          <div v-for="(item, product) in products" :key="product.id">
+            <Product :product="item" />
+          </div>
         </div>
       </div>
       <div class="col-md-3 pt-5">
@@ -24,22 +22,41 @@
 // import SideNav from "../components/SideNav.vue";
 import Product from "@/components/Product.vue";
 import Cart from "@/components/Cart.vue";
-import { mapState } from "vuex";
+import { ListProducts } from "@/services/graphQl/querys";
+
 export default {
   name: "Home",
   components: {
-    //SideNav,
     Product,
     Cart,
   },
   data() {
-    return {};
+    return {
+      cart: [],
+      products: this.$store.getters.products,
+    };
   },
-  computed: {
-    ...mapState({
-      products: (state) => state.products,
-      cart: (state) => state.cart,
-    }),
+  created() {
+    this.getProducts();
+  },
+  methods: {
+    async getProducts() {
+      /*eslint-disable */
+      let response = await this.$apollo
+        .query({
+          query: ListProducts,
+        })
+        .then((result) => {
+          this.loading = false;
+          this.$store.commit("setproducts", result.data.listProducts);
+          console.log("productos obtenidos");
+          console.log(this.products);
+          this.products = result.data.listProducts;
+        })
+        .catch(({ graphQLErrors }) => {
+          console.log(graphQLErrors);
+        });
+    },
   },
 };
 </script>

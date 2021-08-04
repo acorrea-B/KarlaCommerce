@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="h-100">
+  <div id="app">
     <div id="page-wrapper">
       <div id="nav">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -30,6 +30,9 @@ import { localize } from "vee-validate";
 import es from "vee-validate/dist/locale/es.json";
 
 localize("es", es);
+export default {
+  name: "App",
+};
 </script>
 <style lang="scss">
 @import "assets/css/main.css";

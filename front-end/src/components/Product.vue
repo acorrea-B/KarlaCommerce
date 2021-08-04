@@ -1,44 +1,52 @@
 <template>
-  <div class="col mb-4">
-    <div class="card">
-      <img :src="product.url" class="card-img-top" alt="..." />
-      <div class="card-body">
-        <h5 class="card-title">{{ product.name }}</h5>
-        <p class="card-text">
-          ${{ product.price }}
-          <br />
-          <small>
-            {{ product.shortdesc }}
-          </small>
-        </p>
-        <button
-          @click="addToCart()"
-          class="btn btn-primary btn-block"
-          :disabled="itemAlreadyInCart"
-        >
-          {{ itemAlreadyInCart ? "Added" : "Add to Cart" }}
-        </button>
-      </div>
-    </div>
+  <div class="col-6 col-12-narrower">
+    <section class="box special">
+      <span class="image featured product-image"
+        ><img
+          class="product-image"
+          :src="product.image"
+          alt=""
+          v-if="product.image"/><PuSkeleton v-else
+      /></span>
+      <h3 v-if="product.name">{{ product.name }}</h3>
+      <PuSkeleton v-else />
+      <p>Descipcion: {{ product.description }}</p>
+      Precio:
+      <small v-if="product.value"> {{ product.value }} COP</small
+      ><PuSkeleton v-else />
+      <br />
+      <button
+        v-if="product"
+        @click="addToCart()"
+        class="btn btn-primary btn-block"
+        :disabled="itemAlreadyInCart"
+      >
+        {{ itemAlreadyInCart ? "Added" : "Add to Cart" }}</button
+      ><PuSkeleton v-else />
+    </section>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
 export default {
   name: "Product",
   props: ["product"],
+  data() {
+    return {
+      cart: this.$store.getters.cart,
+    };
+  },
   computed: {
-    ...mapState({
-      cart: (state) => state.cart,
-    }),
     itemAlreadyInCart() {
       let inCart = false;
-      this.cart.forEach((item) => {
-        if (item.id == this.product.id) {
-          inCart = true;
-        }
-      });
+      if (this.cart) {
+        this.cart.forEach((item) => {
+          if (item.id == this.product.id) {
+            inCart = true;
+          }
+        });
+      }
+
       return inCart;
     },
   },
@@ -53,3 +61,8 @@ export default {
   },
 };
 </script>
+<style>
+.product-image {
+  width: 20%;
+}
+</style>
