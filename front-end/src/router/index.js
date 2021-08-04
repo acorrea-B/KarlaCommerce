@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import Home from '@/views/Home.vue'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -13,16 +13,12 @@ const router = new VueRouter({
     {
       path: '/',
       name: 'Home',
-      component: () => import('@/views/Login.vue'),
-      meta: {
-        pageTitle: 'INICIO',
-        breadcrumb: [
-          {
-            text: 'INICIO',
-            active: true,
-          },
-        ],
-      },
+      component: Home
+    },
+    {
+      path: '/shop',
+      name: 'ShoppingCart',
+      component: () => import("@/views/ShoppingCart.vue")
     },
     {
       path: '/error-404',
