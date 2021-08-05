@@ -2490,15 +2490,14 @@ input[type="radio"] + label:before {
 }
 
 .icon.major {
-  background: #666;
+  background: #e89980;
   border-radius: 100%;
   color: #ffffff;
   cursor: default;
   display: inline-block;
-  height: 3em;
   text-align: center;
   line-height: 3em;
-  margin: 0 0 2em 0;
+  margin: 0 0 3em 0;
   width: 3em;
 }
 
@@ -2508,19 +2507,19 @@ input[type="radio"] + label:before {
 
 @media only screen and (max-width: 600px) {
   .icon.major {
-    background: #666;
+    background: #e89980;
     border-radius: 100%;
     color: #ffffff;
     cursor: default;
     display: inline-block;
-    height: 2.5em;
+    height: 4em;
     text-align: center;
-    line-height: 2.5em;
+    line-height: 4em;
     margin: 0 0 2em 0;
-    width: 2.5em;
+    width: 4em;
   }
   .icon.major:before {
-    font-size: 1.3em;
+    font-size: 2em;
   }
 }
 
@@ -2545,7 +2544,7 @@ input[type="radio"] + label:before {
 }
 
 .icon.major.accent5 {
-  background: #e5cb95;
+  background: #8a806d;
   color: #ffffff;
 }
 

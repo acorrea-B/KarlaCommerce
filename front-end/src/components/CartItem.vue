@@ -1,30 +1,31 @@
 <template>
-  <div class="row cart-item-row">
-    <div class="col-12">
-      <Product :product="product" cartButton="true" />
+  <section class="box special">
+    <span class="image featured"
+      ><img :src="product.image" alt="" v-if="product.image"/><PuSkeleton v-else
+    /></span>
+    <h3>{{ product.name }}</h3>
+    <p v-if="product.value">Descripcion: {{ product.description }}</p>
+    <PuSkeleton v-else />
+    <p v-if="product.value">Precio: {{ toCurrency(product.value) }}</p>
+    <PuSkeleton v-else />
+    <div>Cantidad: {{ product.amount }}</div>
+
+    <div>
+      <input
+        type="submit"
+        :value="'Eliminar'"
+        class="fit"
+        v-if="product"
+        @click="removeItem()"
+      />
     </div>
-    <div class="col-12">
-      <div class="col-12 col-12-mobilep" v-if="!cartButton">
-        <input
-          type="submit"
-          :value="'Eliminar'"
-          class="fit"
-          v-if="product"
-          @click="removeItem()"
-        />
-      </div>
-    </div>
-  </div>
+  </section>
 </template>
 
 <script>
-import Product from "./Product.vue";
 export default {
   name: "CartItem",
   props: ["product"],
-  components: {
-    Product,
-  },
   computed: {
     cart: function() {
       return this.$store.getters.cart;
@@ -35,6 +36,11 @@ export default {
     },
   },
   methods: {
+    toCurrency(value) {
+      return (
+        "$ " + value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,") + " COP"
+      );
+    },
     removeItem() {
       this.$store.commit("removeCartItem", this.product);
       this.cart;

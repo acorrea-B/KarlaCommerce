@@ -1,8 +1,5 @@
 <template>
   <div id="app" class="landing is-preload">
-    <section class="cartProducts">
-      <a href="/shop"> <span class="icon solid major fa-cart-plus"></span></a>
-    </section>
     <router-view />
 
     <footer id="footer">
@@ -58,15 +55,17 @@ export default {
 <style lang="scss">
 @import "assets/css/main.css";
 .cartProducts {
-  position: absolute;
+  position: fixed;
+  z-index: 1000000000000;
   top: 1%;
   left: 94%;
 }
 @media only screen and (max-width: 600px) {
   .cartProducts {
-    position: absolute;
-    top: 1%;
-    left: 85%;
+    position: fixed;
+    z-index: 1000000000000;
+    top: 85%;
+    left: 80%;
   }
 }
 </style>

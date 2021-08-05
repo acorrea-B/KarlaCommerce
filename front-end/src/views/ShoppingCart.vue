@@ -3,21 +3,28 @@
     <div class="purchase">
       <h2>Karla Accesorios</h2>
       <p>Carrito de compras</p>
+      <ul class="actions special">
+        <li>
+          <a href="/products" class="button primary">Seguir comprando</a>
+        </li>
+      </ul>
     </div>
-    <div class=" container">
+    <section id="main" class="container">
       <div class="row">
-        <div class="col-12 pt-5">
-          <CartItem
-            v-for="product in cart"
-            :product="product"
-            :key="product.id"
-          />
+        <div
+          class="col-5 col-12-narrower"
+          v-for="product in cart"
+          :key="product.id"
+        >
+          <CartItem :product="product" />
         </div>
+      </div>
+      <div class="row">
         <div class="col-12 pt-5">
           <Cart />
         </div>
       </div>
-    </div>
+    </section>
   </div>
 </template>
 
@@ -32,10 +39,10 @@ export default {
     CartItem,
     Cart,
   },
-  data() {
-    return {
-      cart: this.$store.getters.cart,
-    };
+  computed: {
+    cart: function() {
+      return this.$store.getters.cart;
+    },
   },
 };
 </script>
@@ -45,7 +52,7 @@ export default {
   padding: 6% 2%;
   text-align: center;
   position: inherit;
-  background-color: #7fcdb8;
+  background-color: #666;
   color: #ffffff;
 }
 .purchase h2,

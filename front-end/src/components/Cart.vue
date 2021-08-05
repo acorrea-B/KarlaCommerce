@@ -1,40 +1,74 @@
 <template>
-  <section class="box special">
-    <div class="subtotal">
-      <ul>
-        <li class="totalRow">
-          <span class="label">Subtotal</span
-          ><span class="value">{{ totalPrice }}</span>
-        </li>
+  <section class="box special features">
+    <div class="subtotalBox">
+      <div class="subtotal">
+        <ul>
+          <li class="totalRow">
+            <span class="label">Subtotal</span
+            ><span class="value">{{ toCurrency(totalPrice) }}</span>
+          </li>
 
-        <li class="totalRow final">
-          <span class="label">Valor total</span
-          ><span class="value">{{ totalPrice }}</span>
-        </li>
-        <li class="totalRow"><a href="#" class="btn continue">Revisar</a></li>
-      </ul>
-    </div>
-    <div v-if="cart.length == 0">
-      <ul class="actions special">
-        <li><a href="/products" class="button primary">Productos</a></li>
-      </ul>
+          <li class="totalRow final">
+            <span class="label">Valor total</span
+            ><span class="value">{{ toCurrency(totalPrice) }}</span>
+          </li>
+          <li class="totalRow" @click="newPurchase">
+            <a :href="redirect" @click="func(0)" class="btn continue"
+              >Revisar</a
+            >
+          </li>
+        </ul>
+      </div>
     </div>
   </section>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      redirect: "#",
+    };
+  },
   computed: {
     cart: function() {
       return this.$store.getters.cart;
     },
     totalPrice() {
       return this.cart.reduce((total, next) => {
-        let value = total + next.amount * next.value;
-        return (
-          "$ " + value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,") + " COP"
-        );
+        console.log(next.value);
+        console.log(next.amount);
+        console.log(total);
+        let value = next.value ? total + next.amount * next.value : total + 0;
+
+        return value;
       }, 0);
+    },
+  },
+  methods: {
+    toCurrency(value) {
+      return (
+        "$ " + value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,") + " COP"
+      );
+    },
+    newPurchase() {
+      console.log(this.cart);
+      console.log(this.totalPrice);
+      if (this.cart.length > 0) {
+        this.$store.commit("setpurchase", {
+          products: this.cart,
+          total_value: this.totalPrice,
+        });
+        this.redirect = "/purchase";
+      } else {
+        console.log("error");
+        this.$toast.open({
+          message:
+            "!Hooo noo¡ aun no hay productos en el carrito, primero intenta agregar los para realizar la compra.",
+          type: "warning",
+          duration: 5000,
+        });
+      }
     },
   },
 };
@@ -84,9 +118,13 @@ $fontSerif: "Droid Serif", serif;
     }
   }
 }
+.subtotalBox {
+  width: 100%;
+  min-height: 150px;
+}
 .subtotal {
   float: right;
-  width: 35%;
+  width: 40%;
   .totalRow {
     list-style: none;
     padding: 0.5em;

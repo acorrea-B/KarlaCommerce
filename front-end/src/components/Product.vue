@@ -3,39 +3,43 @@
     <span class="image featured"
       ><img :src="product.image" alt="" v-if="product.image"/><PuSkeleton v-else
     /></span>
-    <h3 v-if="product.name">{{ product.name }}</h3>
+    <h3 v-if="product.id">{{ product.name }}</h3>
     <PuSkeleton v-else />
-    <p>Descripcion: {{ product.description }}</p>
-    Precio: {{ toCurrency(product.value) }}
+    <p v-if="product.value">Descripcion: {{ product.description }}</p>
+    <PuSkeleton v-else />
+    <p v-if="product.value">Precio: {{ toCurrency(product.value) }}</p>
+    <PuSkeleton v-else />
     <br />
     <br />
 
-    <integer-plusminus
-      v-if="!cartButton"
-      :min="ipm_min"
-      :max="ipm_max"
-      :step="ipm_step"
-      :vertical="ipm_vertical"
-      v-model="ipm_value"
-    >
-      {{ !product.amount ? ipm_value : product.amount }}
+    <div v-if="product.id">
+      <integer-plusminus
+        :min="ipm_min"
+        :max="ipm_max"
+        :step="ipm_step"
+        :vertical="ipm_vertical"
+        v-model="ipm_value"
+      >
+        {{ !product.amount ? ipm_value : product.amount }}
 
-      <template slot="decrement">-</template>
+        <template slot="decrement">-</template>
 
-      <template slot="increment">+ </template>
-    </integer-plusminus>
-    <div v-else>Cantidad: {{ product.amount }}</div>
-    <br />
+        <template slot="increment">+ </template>
+      </integer-plusminus>
 
-    <div class="col-8 col-12-mobilep" v-if="!cartButton">
-      <input
-        type="submit"
-        :value="itemAlreadyInCart ? 'Agregado' : 'Agregar'"
-        class="fit"
-        v-if="product"
-        @click="addToCart(ipm_value)"
-      />
+      <br />
+
+      <div class="col-8 col-12-mobilep">
+        <input
+          type="submit"
+          :value="itemAlreadyInCart ? 'Agregado' : 'Agregar'"
+          class="fit"
+          v-if="product"
+          @click="addToCart(ipm_value)"
+        />
+      </div>
     </div>
+    <PuSkeleton v-else />
   </section>
 </template>
 
@@ -43,7 +47,7 @@
 import { IntegerPlusminus } from "vue-integer-plusminus";
 export default {
   name: "Product",
-  props: ["product", "cartButton"],
+  props: ["product"],
   components: { IntegerPlusminus },
   data() {
     return {

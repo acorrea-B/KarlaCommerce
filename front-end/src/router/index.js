@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
+import store from '@/store'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -19,6 +20,17 @@ const router = new VueRouter({
       path: '/shop',
       name: 'ShoppingCart',
       component: () => import("@/views/ShoppingCart.vue")
+    },
+    {
+      path: '/purchase',
+      name: 'PurchaseConfirm',
+      component: () => {
+        if (store.getters.purchase) {
+          return import("@/views/Purchase/PurchaseConfirm.vue");
+        } else {
+          return import("@/views/ShoppingCart.vue");
+        }
+      }
     },
     {
       path: '/products',
