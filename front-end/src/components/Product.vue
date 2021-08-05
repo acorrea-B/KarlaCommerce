@@ -11,28 +11,30 @@
     <br />
 
     <integer-plusminus
+      v-if="!cartButton"
       :min="ipm_min"
       :max="ipm_max"
       :step="ipm_step"
       :vertical="ipm_vertical"
       v-model="ipm_value"
     >
-      {{ ipm_value }}
+      {{ !product.amount ? ipm_value : product.amount }}
 
       <template slot="decrement">-</template>
 
       <template slot="increment">+ </template>
     </integer-plusminus>
+    <div v-else>Cantidad: {{ product.amount }}</div>
     <br />
 
-    <div class="col-8 col-12-mobilep">
+    <div class="col-8 col-12-mobilep" v-if="!cartButton">
       <input
         type="submit"
         :value="itemAlreadyInCart ? 'Agregado' : 'Agregar'"
         class="fit"
         v-if="product"
         @click="addToCart(ipm_value)"
-      /><PuSkeleton v-else />
+      />
     </div>
   </section>
 </template>
@@ -41,7 +43,7 @@
 import { IntegerPlusminus } from "vue-integer-plusminus";
 export default {
   name: "Product",
-  props: ["product"],
+  props: ["product", "cartButton"],
   components: { IntegerPlusminus },
   data() {
     return {
@@ -93,7 +95,7 @@ export default {
     },
     toCurrency(value) {
       return (
-        "$" + value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,") + " COP"
+        "$ " + value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,") + " COP"
       );
     },
     addToCart(amount) {

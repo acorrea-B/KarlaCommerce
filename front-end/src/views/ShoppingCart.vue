@@ -1,16 +1,21 @@
 <template>
-  <div class="home container">
-    <div class="row">
-      <div class="col-md-8 pt-5">
-        <CartItem
-          v-for="product in cart"
-          :product="product"
-          :key="product.id"
-        />
-      </div>
-      <div class="col-md-4 pt-5">
-        <!-- <SideNav /> -->
-        <Cart />
+  <div>
+    <div class="purchase">
+      <h2>Karla Accesorios</h2>
+      <p>Carrito de compras</p>
+    </div>
+    <div class=" container">
+      <div class="row">
+        <div class="col-12 pt-5">
+          <CartItem
+            v-for="product in cart"
+            :product="product"
+            :key="product.id"
+          />
+        </div>
+        <div class="col-12 pt-5">
+          <Cart />
+        </div>
       </div>
     </div>
   </div>
@@ -20,7 +25,6 @@
 // import SideNav from "../components/SideNav.vue";
 import CartItem from "@/components/CartItem.vue";
 import Cart from "@/components/Cart.vue";
-import { mapState } from "vuex";
 export default {
   name: "ShoppingCart",
   components: {
@@ -29,12 +33,26 @@ export default {
     Cart,
   },
   data() {
-    return {};
-  },
-  computed: {
-    ...mapState({
-      cart: (state) => state.cart,
-    }),
+    return {
+      cart: this.$store.getters.cart,
+    };
   },
 };
 </script>
+
+<style scoped>
+.purchase {
+  padding: 6% 2%;
+  text-align: center;
+  position: inherit;
+  background-color: #7fcdb8;
+  color: #ffffff;
+}
+.purchase h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #fff;
+}
+</style>

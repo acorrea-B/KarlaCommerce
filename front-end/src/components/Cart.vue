@@ -1,9 +1,9 @@
 <template>
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">Your Cart</h5>
+      <h5 class="card-title">Detalle de compra</h5>
       <p v-if="cart.length == 0">
-        Your Cart is Empty
+        Aun no hay productos en tu carrito
       </p>
     </div>
     <ul class="list-group list-group-flush">
@@ -13,33 +13,40 @@
         class="list-group-item d-flex justify-content-between align-items-center"
       >
         {{ item.name }}
-        <span class="badge badge-primary badge-pill">{{ item.quantity }}</span>
+        <span class="badge badge-primary badge-pill">{{ item.amount }}</span>
       </li>
       <li
         class="list-group-item d-flex justify-content-between align-items-center"
       >
-        Price <b>${{ totalPrice }}</b>
+        Valor total <b>{{ totalPrice }}</b>
       </li>
     </ul>
 
-    <div class="card-body">
-      <router-link to="/shop" class="btn btn-primary btn-block"
-        >Checkout</router-link
-      >
+    <div v-if="cart.length == 0">
+      <ul class="actions special">
+        <li><a href="/products" class="button primary">Productos</a></li>
+      </ul>
+    </div>
+    <div v-else>
+      <ul class="actions special">
+        <li><a href="/shop" class="button primary">Revisar</a></li>
+      </ul>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
 export default {
   computed: {
-    ...mapState({
-      cart: (state) => state.cart,
-    }),
+    cart: function() {
+      return this.$store.getters.cart;
+    },
     totalPrice() {
       return this.cart.reduce((total, next) => {
-        return total + next.quantity * next.price;
+        let value = total + next.amount * next.value;
+        return (
+          "$ " + value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,") + " COP"
+        );
       }, 0);
     },
   },

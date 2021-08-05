@@ -8,7 +8,7 @@
     <section id="main" class="container">
       <div class="row">
         <div
-          class="col-6 col-12-narrower"
+          class="col-7 col-12-narrower"
           v-for="(item, product) in products"
           :key="product.id"
         >
@@ -31,7 +31,6 @@ export default {
   },
   data() {
     return {
-      cart: [],
       products: this.$store.getters.products,
     };
   },
