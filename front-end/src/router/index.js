@@ -21,6 +21,11 @@ const router = new VueRouter({
       component: () => import("@/views/ShoppingCart.vue")
     },
     {
+      path: '/products',
+      name: 'products',
+      component: () => import("@/views/Products.vue")
+    },
+    {
       path: '/error-404',
       name: 'error-404',
       component: () => import('@/views/error/Error404.vue'),

@@ -8435,6 +8435,13 @@ vue-i18n@^8.25.0:
   resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.25.0.tgz#1037d9295fa2845a230b771de473481edb2cfc4c"
   integrity sha512-ynhcL+PmTxuuSE1T10htiSXzjBozxYIE3ffbM1RfgAkVbr/v1SP+9Mi/7/uv8ZVV1yGuKjFAYp9BXq+X7op6MQ==
 
+vue-integer-plusminus@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/vue-integer-plusminus/-/vue-integer-plusminus-1.5.1.tgz#66b74f2da9fbbc5f25b6344d3a02718118cf62ba"
+  integrity sha512-MhaoTEPtfCFJKlfHx2nXYPlUR1FbM+kWWFBuWlzYa3UPf9LK9qouXOiyCQx0Ylt3vyX9lIxlSny7RL3lYhlmgw==
+  dependencies:
+    vue "^2.6.12"
+
 "vue-loader-v16@npm:vue-loader@^16.1.0":
   version "16.4.0"
   resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-16.4.0.tgz#79cf923ef00cc396f593b2e7963904640f41cf10"
@@ -8469,6 +8476,13 @@ vue-moment@^4.1.0:
   dependencies:
     moment "^2.19.2"
 
+vue-money-format@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/vue-money-format/-/vue-money-format-1.2.1.tgz#dd50c3c561379e236df0b40a9e285beedcb43971"
+  integrity sha512-vonpwhK6q+3VXBHcIaYX+WLvNYHzBpt4+vOHFQQBrz0AoTFKIAj8EI/17hJ7Qng2dhJRBzKannVmCC4iltmdKw==
+  dependencies:
+    vue "^2.6.11"
+
 vue-router@^3.5.2:
   version "3.5.2"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.5.2.tgz#5f55e3f251970e36c3e8d88a7cd2d67a350ade5c"
@@ -8500,7 +8514,7 @@ vue-toastification@^1.7.11:
   resolved "https://registry.yarnpkg.com/vue-toastification/-/vue-toastification-1.7.11.tgz#3e46157b7361f5005b1a60112bc91f5bd00c66d7"
   integrity sha512-CT/DYttb/VtWDNdhJG0BskLVfveZq5rGOgO/u3qTX+RPQQzX0WSai8VVxxUuvR8UpxfSGPS+JQleR33bo3Vadg==
 
-vue@^2.6.12:
+vue@^2.6.11, vue@^2.6.12:
   version "2.6.14"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.14.tgz#e51aa5250250d569a3fbad3a8a5a687d6036e235"
   integrity sha512-x2284lgYvjOMj3Za7kqzRcUSxBboHqtgRE2zlos1qWaOye5yUmHn42LB1250NJBLRwEcdrB0JRwyPTEPhfQjiQ==

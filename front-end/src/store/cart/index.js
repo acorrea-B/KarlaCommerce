@@ -1,5 +1,5 @@
 const initialState = () => ({
-    cart: [Object, Object],
+    cart: [],
     
   })
   
@@ -13,16 +13,15 @@ export default {
       },
       mutations: {
         addCartItem(state, item) {
-            item.quantity = 1;
-            state.cart.push(item);
+            state.cart.push(item)
           },
           updateCartItem(state, updatedItem) {
             state.cart = state.cart.map((cartItem) => {
               if (cartItem.id == updatedItem.id) {
-                return updatedItem;
+                return updatedItem
               }
       
-              return cartItem;
+              return cartItem
             });
           },
           removeCartItem(state, item) {
