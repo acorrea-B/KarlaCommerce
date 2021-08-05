@@ -10,7 +10,7 @@ import VueApollo from 'vue-apollo'
 // HTTP connection to the API
 const httpLink = createHttpLink({
   // You should use an absolute URL here
-  uri: 'http://127.0.0.1:8000/api',
+  uri: 'http://127.0.0.1:8000/api/',
 })
 // Error Handling
 
@@ -30,10 +30,6 @@ const authLink = setContext((_, { headers }) => {
 const apolloClient = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
-  fetchOptions: {
-    mode: 'no-cors',
-  },
-
 })
 Vue.use(VueApollo)
 export const apolloProvider = new VueApollo({

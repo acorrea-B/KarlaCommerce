@@ -5,6 +5,7 @@ import SecureLS from "secure-ls"
 import products from './products'
 import purchases from './purchases'
 import operator from './operator'
+import cart from './cart'
 // Modules
 
 var ls = new SecureLS({
@@ -19,7 +20,8 @@ export default new Vuex.Store({
     modules: {
         products,
         purchases,
-        operator
+        operator,
+        cart
     },
     plugins: [createPersistedState(
       {

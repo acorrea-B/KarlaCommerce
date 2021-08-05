@@ -47,8 +47,7 @@ class Photos:
                         generate_presigned_url( "get_object", 
                                                 Params = { "Bucket" : self.bucket,
                                                             "Key" : file_name },
-                                                ExpiresIn = expiration,
-                                                HttpMethod = "https"
+                                                ExpiresIn = expiration
                                             )
         except ClientError as e:
             # En el caso en que se presente un error se registra en el log del sistema

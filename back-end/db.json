@@ -5,7 +5,7 @@
         "name": "Aretes",
         "value": 15200,
         "image": "aretes.png",
-        "description":"Aretes de bñados en plata con encrustaciones de piedras hermosas"
+        "description":"Aretes bañados en plata con encrustaciones de piedras hermosas"
       }
     },
     {
@@ -29,7 +29,7 @@
         "fields": {
           "name": "Manilla",
           "value": 30999,
-          "image": "Manilla.png",
+          "image": "manilla.png",
           "description":"Manilla para hombre de cuero"
         }
     }

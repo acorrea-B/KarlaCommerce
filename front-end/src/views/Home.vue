@@ -1,45 +1,10 @@
 <template>
-  <div class="home container">
-    <div class="row">
-      <div class="col-md-9 pt-5">
-        <div
-          class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-3"
-        >
-          <Product
-            v-for="product in products"
-            :product="product"
-            :key="product.id"
-          />
-        </div>
-      </div>
-      <div class="col-md-3 pt-5">
-        <!-- <SideNav /> -->
-        <Cart />
-      </div>
-    </div>
-  </div>
+  <section id="banner">
+    <h2>Karla Accesorios</h2>
+    <p>Another fine responsive site template freebie by HTML5 UP.</p>
+    <ul class="actions special">
+      <li><a href="/products" class="button primary">Comprar</a></li>
+      <li><a href="/" class="button">Log in</a></li>
+    </ul>
+  </section>
 </template>
-
-<script>
-// import SideNav from "../components/SideNav.vue";
-import Product from "@/components/Product.vue";
-import Cart from "@/components/Cart.vue";
-import { mapState } from "vuex";
-export default {
-  name: "Home",
-  components: {
-    //SideNav,
-    Product,
-    Cart,
-  },
-  data() {
-    return {};
-  },
-  computed: {
-    ...mapState({
-      products: (state) => state.products,
-      cart: (state) => state.cart,
-    }),
-  },
-};
-</script>

@@ -25,8 +25,6 @@ SECRET_KEY = 'django-insecure-ytc&@8d*n(9ba6j+*n@kx2w8v%c@_k=+x%w^l$^kv%f4ch59dl
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -37,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "corsheaders",
     'graphene_django',
     'apps',
     'apps.users',
@@ -47,6 +46,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,6 +55,22 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
+ALLOWED_HOSTS = ["*"]
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+
+
 
 ROOT_URLCONF = 'karlaCommerce.urls'
 
@@ -118,6 +134,7 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
+SECURE_SSL_REDIRECT = False
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -148,3 +165,4 @@ AUTH_USER_MODEL = 'users.User'
 COMMERCE = "backend-alejandro-correa"
 PASSWORDCOMMERCE = "sTbkfTmG7wNrRn78"
 WEBCLIENT = "https://www.youtube.com/?transaction="
+
