@@ -14,7 +14,7 @@
             name="firstName"
             id="firstName"
             placeholder="Nombres"
-            :model="firstName"
+            v-model="costumer.firstName"
           />
         </div>
         <div class="col-8 col-12-mobilep">
@@ -23,7 +23,7 @@
             name="lastName"
             id="lastName"
             placeholder="Apellidos"
-            :model="lastName"
+            v-model="costumer.lastName"
           />
         </div>
         <div class="col-8 col-12-mobilep">
@@ -32,7 +32,7 @@
             name="identification"
             id="identification"
             placeholder="Número de cédula"
-            :model="identification"
+            v-model="costumer.identification"
           />
         </div>
         <div class="col-8 col-12-mobilep">
@@ -41,7 +41,7 @@
             name="email"
             id="email"
             placeholder="Correo electrónico"
-            :model="email"
+            v-model="costumer.email"
           />
         </div>
 
@@ -58,23 +58,20 @@ export default {
   data() {
     return {
       purchase: this.$store.getters.purchase,
-      firstName: "",
-      lastName: "",
-      identification: "",
-      email: "",
+      costumer: {},
     };
   },
   methods: {
     newPurchase() {
-      console.log(this.lastName);
       if (
-        this.firstName &&
-        this.lastName &&
-        this.identification &&
-        this.email
+        this.costumer.firstName &&
+        this.costumer.lastName &&
+        this.costumer.identification &&
+        this.costumer.email
       ) {
         this.purchase.costumer = this.costumer;
         this.$store.commit("setpurchase", this.purchase);
+        console.log(JSON.stringify(this.purchase));
       } else {
         this.$toast.open({
           message:
