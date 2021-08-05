@@ -42,3 +42,18 @@ export default {
   },
 };
 </script>
+<style scoped>
+.purchaseDetail {
+  padding: 6% 2%;
+  text-align: center;
+  position: inherit;
+  background-color: #ffffff;
+}
+.purchase h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #fff;
+}
+</style>
