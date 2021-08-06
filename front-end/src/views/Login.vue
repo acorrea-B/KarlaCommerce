@@ -1,37 +1,94 @@
 <template>
-  <section id="banner">
-    <h2>Alpha</h2>
-    <p>Another fine responsive site template freebie by HTML5 UP.</p>
-    <ul class="actions special">
-      <li><a href="#" class="button primary">Sign Up</a></li>
-      <li><a href="#" class="button">Learn More</a></li>
-    </ul>
-  </section>
+  <div>
+    <loading :show="show" :label="label"> </loading>
+    <section id="banner">
+      <loading :show="show" :label="label"> </loading>
+      <h2>Karla Accesorios</h2>
+      <p>
+        Ingreso para operadores
+      </p>
+    </section>
+    <section id="main" class="container">
+      <form @submit.prevent="autOperator">
+        <div class="row gtr-50 gtr-uniform">
+          <div class="col-8 col-12-mobilep">
+            <input
+              type="text"
+              name="identification"
+              id="identification"
+              placeholder="Número de cédula"
+              v-model="operator.identification"
+            />
+          </div>
+          <div class="col-8 col-12-mobilep">
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Contraseña"
+              v-model="operator.password"
+            />
+          </div>
+          <div class="col-4 col-12-mobilep">
+            <input type="submit" value="Ingresar" class="fit" />
+          </div>
+        </div>
+      </form>
+    </section>
+  </div>
 </template>
 
 <script>
+import { Auth } from "@/services/graphQl/mutations";
+import loading from "vue-full-loading";
 export default {
-  name: "HelloWorld",
-  props: {
-    msg: String,
+  data() {
+    return {
+      purchase: this.$store.getters.purchase,
+      operator: {},
+      show: false,
+      label: "Estamos procesando tu compra",
+      linkPayment: "",
+    };
+  },
+  components: {
+    loading,
+  },
+  methods: {
+    async autOperator() {
+      /*eslint-disable */
+      this.show = true;
+      let response = await this.$apollo
+        .mutate({
+          mutation: Auth,
+          variables: {
+            identification: this.operator.identification,
+            password: this.operator.password,
+          },
+        })
+        .then((result) => {
+          this.$store.commit("setToken", result.data.tokenAuth.token);
+        })
+        .catch(({ graphQLErrors }) => {
+          this.show = false;
+          console.log(graphQLErrors);
+          this.$toast.open({
+            message: "Credenciales erroneas, intentalo nuevamente",
+            type: "error",
+            duration: 5000,
+          });
+        });
+    },
   },
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+>
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+.loginOperator {
+  position: inherit;
+  top: 100%;
+  width: 100%;
+  text-align: center;
 }
 </style>
