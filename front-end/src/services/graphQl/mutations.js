@@ -21,3 +21,10 @@ mutation NewPurchase($total_value: Int!, $costumer: CostumerPurchaseInput!, $pro
     }
   }
 `
+export const Auth = gql`
+mutation auth($identification:String!, $password:String!){
+    tokenAuth(identification:$identification, password:$password){
+      token
+    }
+  }
+`

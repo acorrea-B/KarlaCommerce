@@ -13,6 +13,7 @@ import VueMoment from 'vue-moment'
 import moment from 'moment-timezone'
 require('vue-toast-notification/dist/theme-sugar.css')
 
+
 Vue.use(VueToast);
 Vue.use(VueCompositionAPI)
 require('moment/locale/es')
