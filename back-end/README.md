@@ -1,4 +1,8 @@
 ```
+Django requires postgres to run correctly in case you don't have postgres installed, change the database in the settings.py comment out the default database and talk about the sqllite database.
+```
+
+```
  Virtual env
 ```
 
