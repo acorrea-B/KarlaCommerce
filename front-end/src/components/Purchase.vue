@@ -16,7 +16,7 @@
     <PuSkeleton v-else />
     <br />
     <br />
-
+    {{ purchase.id }}
     <div class="col-8 col-12-mobilep">
       <input
         type="submit"
@@ -55,12 +55,12 @@ export default {
         .mutate({
           mutation: RefoundPayment,
           variables: {
-            identification: this.operator.identification,
+            purchase_id: this.purchase.id,
           },
         })
         .then((result) => {
-          console.log(resul.data.purchase);
-          //this.purchase = resul.data.purchase
+          console.log(result.data.purchase);
+          this.purchase = result.data.purchase;
         })
         .catch(({ graphQLErrors }) => {
           this.show = false;

@@ -43,9 +43,11 @@ export default {
         },
       })
       .then((result) => {
-        if (resul.data.purchase.state == "paid") {
+        console.log(result);
+        if (result.data.purchase.state == "paid") {
           this.confirmed = true;
           this.costumer = resul.data.purchase.costumer;
+          this.$store.commit("setpurchase", {});
         }
         this.show = false;
       })

@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       purchases:
-        this.$store.getters.purchases.legth > 0
+        this.$store.getters.purchases.length > 0
           ? this.$store.getters.purchases
           : [Object, Object],
     };
@@ -51,8 +51,6 @@ export default {
         .then((result) => {
           this.loading = false;
           this.$store.commit("setPurchases", result.data.purchases);
-          console.log("productos obtenidos");
-          console.log(result.data.purchases);
           this.purchases = result.data.purchases;
         })
         .catch(({ graphQLErrors }) => {
