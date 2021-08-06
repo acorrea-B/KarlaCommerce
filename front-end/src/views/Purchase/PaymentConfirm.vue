@@ -43,7 +43,6 @@ export default {
         },
       })
       .then((result) => {
-        console.log(result);
         if (result.data.purchase.state == "paid") {
           this.confirmed = true;
           this.costumer = resul.data.purchase.costumer;

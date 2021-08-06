@@ -112,7 +112,6 @@ export default {
           .then((result) => {
             this.linkPayment = result.data.newPurchase.payment.tpagaPaymentUrl;
             this.show = false;
-            console.log(result.data.newPurchase.purchase.id);
             this.purchase.id = result.data.newPurchase.purchase.id;
           })
           .catch(({ graphQLErrors }) => {

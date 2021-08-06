@@ -103,7 +103,6 @@ export default {
       );
     },
     addToCart(amount) {
-      console.log(amount);
       if (amount == 0) {
         if (this.itemAlreadyInCart) {
           this.$store.commit("removeCartItem", this.product);

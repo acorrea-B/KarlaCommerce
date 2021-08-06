@@ -59,7 +59,6 @@ export default {
           },
         })
         .then((result) => {
-          console.log(result.data.purchase);
           this.purchase = result.data.purchase;
         })
         .catch(({ graphQLErrors }) => {

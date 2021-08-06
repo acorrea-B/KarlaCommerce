@@ -62,8 +62,6 @@ export default {
         .then((result) => {
           this.loading = false;
           this.$store.commit("setproducts", result.data.listProducts);
-          console.log("productos obtenidos");
-          console.log(this.products);
           this.products = result.data.listProducts;
         })
         .catch(({ graphQLErrors }) => {

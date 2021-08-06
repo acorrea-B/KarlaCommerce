@@ -36,9 +36,6 @@ export default {
     },
     totalPrice() {
       return this.cart.reduce((total, next) => {
-        console.log(next.value);
-        console.log(next.amount);
-        console.log(total);
         let value = next.value ? total + next.amount * next.value : total + 0;
 
         return value;
@@ -52,8 +49,6 @@ export default {
       );
     },
     newPurchase() {
-      console.log(this.cart);
-      console.log(this.totalPrice);
       if (this.cart.length > 0) {
         this.$store.commit("setpurchase", {
           products: this.cart,
@@ -61,7 +56,6 @@ export default {
         });
         this.redirect = "/purchase";
       } else {
-        console.log("error");
         this.$toast.open({
           message:
             "!Hooo noo¡ aun no hay productos en el carrito, primero intenta agregar los para realizar la compra.",
