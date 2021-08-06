@@ -27,7 +27,6 @@ class ProductPruchase:
                 
             
             try: 
-                print(type(id))
                 result = Product.objects.get(id = id)
             except Product.DoesNotExist:
                 return { "status": 400,

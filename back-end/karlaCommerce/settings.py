@@ -164,5 +164,5 @@ IMAGES_BUCKET="karla-products"
 AUTH_USER_MODEL = 'users.User'
 COMMERCE = "backend-alejandro-correa"
 PASSWORDCOMMERCE = "sTbkfTmG7wNrRn78"
-WEBCLIENT = "http://localhost:8080/purchasepayment?purchase="
+WEBCLIENT = "https://localhost:8080/purchasepayment?purchase="
 

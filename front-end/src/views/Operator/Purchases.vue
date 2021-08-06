@@ -2,21 +2,17 @@
   <div>
     <section id="banner">
       <h2>Karla Accesorios</h2>
-      <p>Nuestros productos</p>
-      <section class="cartProducts">
-        <a href="/shop"> <span class="icon solid major fa-cart-plus"></span></a>
-        <span class="purchaseItems">{{ itemNumber }}</span>
-      </section>
+      <p>Ventas</p>
     </section>
 
     <section id="main" class="container">
       <div class="row">
         <div
           class="col-5 col-12-narrower"
-          v-for="(item, product) in products"
-          :key="product.id"
+          v-for="(item, purchase) in purchases"
+          :key="purchase"
         >
-          <Product :product="item" />
+          <Purchase :purchase="item" />
         </div>
       </div>
     </section>
@@ -25,47 +21,39 @@
 
 <script>
 // import SideNav from "../components/SideNav.vue";
-import Product from "@/components/Product.vue";
-import { ListProducts } from "@/services/graphQl/querys";
+import Purchase from "@/components/Purchase.vue";
+import { Purchases } from "@/services/graphQl/querys";
 
 export default {
   name: "Home",
   components: {
-    Product,
+    Purchase,
   },
   data() {
     return {
-      products:
-        this.$store.getters.products.legth > 0
-          ? this.$store.getters.products
+      purchases:
+        this.$store.getters.purchases.length > 0
+          ? this.$store.getters.purchases
           : [Object, Object],
     };
   },
   created() {
-    this.getProducts();
+    this.getPurchases();
   },
-  computed: {
-    cart: function() {
-      return this.$store.getters.cart;
-    },
-    itemNumber() {
-      return this.cart.length;
-    },
-  },
+
   methods: {
-    async getProducts() {
+    async getPurchases() {
       /*eslint-disable */
       let response = await this.$apollo
         .query({
-          query: ListProducts,
+          query: Purchases,
         })
         .then((result) => {
           this.loading = false;
-          this.$store.commit("setproducts", result.data.listProducts);
-          this.products = result.data.listProducts;
+          this.$store.commit("setPurchases", result.data.purchases);
+          this.purchases = result.data.purchases;
         })
         .catch(({ graphQLErrors }) => {
-          this.products = [Object, Object];
           console.log(graphQLErrors);
         });
     },
