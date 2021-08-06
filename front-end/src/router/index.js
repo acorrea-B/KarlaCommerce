@@ -22,6 +22,15 @@ const router = new VueRouter({
       component: () => import("@/views/ShoppingCart.vue")
     },
     {
+      path: '/purchasepayment',
+      name: 'PyamentConfirm',
+      component: () => import("@/views/Purchase/PaymentConfirm.vue"),
+      props:{default: true, 
+        data: route => ({ purchase: route.query.purchase,
+                     }),
+        },
+    },
+    {
       path: '/purchase',
       name: 'PurchaseConfirm',
       component: () => {

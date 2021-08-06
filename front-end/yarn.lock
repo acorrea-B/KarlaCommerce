@@ -8420,6 +8420,13 @@ vue-feather-icons@^5.1.0:
   dependencies:
     babel-helper-vue-jsx-merge-props "^2.0.2"
 
+vue-full-loading@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/vue-full-loading/-/vue-full-loading-1.2.1.tgz#14371ba7b4c858a75c6d8f72f2d1aeeaf02f95a8"
+  integrity sha512-zD5bi2zsmrowQJIg8pF6NThNvnmzDeCg9gtfAH9c+lC3nCHlrxmpYHhi75TQmS3m0myKK17M/Lk25kgZEfgswQ==
+  dependencies:
+    vue "^2.2.1"
+
 vue-functional-data-merge@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/vue-functional-data-merge/-/vue-functional-data-merge-3.1.0.tgz#08a7797583b7f35680587f8a1d51d729aa1dc657"
@@ -8519,7 +8526,7 @@ vue-toastification@^1.7.11:
   resolved "https://registry.yarnpkg.com/vue-toastification/-/vue-toastification-1.7.11.tgz#3e46157b7361f5005b1a60112bc91f5bd00c66d7"
   integrity sha512-CT/DYttb/VtWDNdhJG0BskLVfveZq5rGOgO/u3qTX+RPQQzX0WSai8VVxxUuvR8UpxfSGPS+JQleR33bo3Vadg==
 
-vue@^2.6.11, vue@^2.6.12:
+vue@^2.2.1, vue@^2.6.11, vue@^2.6.12:
   version "2.6.14"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.14.tgz#e51aa5250250d569a3fbad3a8a5a687d6036e235"
   integrity sha512-x2284lgYvjOMj3Za7kqzRcUSxBboHqtgRE2zlos1qWaOye5yUmHn42LB1250NJBLRwEcdrB0JRwyPTEPhfQjiQ==
