@@ -3,11 +3,11 @@
     <loading :show="show" :label="label"> </loading>
     <h2>Karla Accesorios</h2>
     <p v-if="confirmed">
-      {{ costumer.firstName }} tu pago ha sido éxitoso, gracias por preferirnos,
+      {{ costumer.firstName }} Tu pago ha sido exitoso, gracias por preferirnos,
       enviaremos a tu Correo electrónico el voucher de tu compra
     </p>
     <p v-else>
-      {{ costumer.firstName }} tu pago se encuentra pendiente de confirmación.
+      {{ costumer.firstName }} Tu pago se encuentra pendiente de confirmación.
     </p>
     <ul class="actions special">
       <li><a href="/products" class="button primary">Comprar</a></li>

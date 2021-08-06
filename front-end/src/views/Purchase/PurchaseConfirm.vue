@@ -3,7 +3,7 @@
     <h2>Datos del comprador</h2>
     <p>
       Un último paso para rgistrar tu compra, para eso necsitamos unos datos
-      basicos tuyos para poder identificarte.
+      básicos tuyos para poder identificarte.
     </p>
 
     <loading :show="show" :label="label"> </loading>
