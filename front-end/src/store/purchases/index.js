@@ -1,6 +1,6 @@
 const initialState = () => ({
     purchase: {},
-    
+    purchases:[],
   })
   
 export default {
@@ -8,12 +8,18 @@ export default {
       getters: {
         purchase: state =>{
           return state.purchase
+        },
+        purchases: state =>{
+          return state.purchases
         }
   
       },
       mutations: {
         setpurchase(state, purchase) { 
               state.purchase = purchase
+        },
+        setPurchases(state, purchases) { 
+              state.purchases = purchases
         },
         resetState (state) {
           const initial = initialState()

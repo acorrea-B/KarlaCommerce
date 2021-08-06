@@ -41,6 +41,7 @@
 <script>
 import { Auth } from "@/services/graphQl/mutations";
 import loading from "vue-full-loading";
+import router from "@/router/index";
 export default {
   data() {
     return {
@@ -68,6 +69,8 @@ export default {
         })
         .then((result) => {
           this.$store.commit("setToken", result.data.tokenAuth.token);
+          this.$store.commit("setAuth", true);
+          router.push({ name: "PurchasesOperator" });
         })
         .catch(({ graphQLErrors }) => {
           this.show = false;

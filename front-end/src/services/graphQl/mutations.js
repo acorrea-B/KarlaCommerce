@@ -28,3 +28,20 @@ mutation auth($identification:String!, $password:String!){
     }
   }
 `
+export const RefoundPayment = gql`
+mutation refundPaymentPurchase($purchase_id:String!){
+    refundPaymentPurchase(input:{
+      purchaseId:$purchase_id
+    }){
+      purchase{
+        id
+        totalValue
+        state
+      }
+      error{
+        status
+        message
+      }
+    }
+  }
+`

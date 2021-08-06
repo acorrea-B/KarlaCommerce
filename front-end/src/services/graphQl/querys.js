@@ -26,3 +26,31 @@ query PurchaseInfo($purchase_id:String!){
   }
 }
 `
+export const Purchases = gql`
+query purchases{
+  purchases{
+    id
+    totalValue
+    state
+    purchaseDate
+    purchaseConfirmationDate
+    costumer{
+      firstName
+      lastName
+    }
+		products{
+      pageInfo{ startCursor
+      endCursor}
+      edges{
+        node{ 
+        id
+        product{
+          name
+        }
+          amount
+        }
+      }
+    }    
+  }
+}
+`

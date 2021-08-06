@@ -36,6 +36,19 @@ const router = new VueRouter({
         },
     },
     {
+      path: '/purchases',
+      name: 'PurchasesOperator',
+      component: () => {
+        if (store.getters.auth) {
+          return import("@/views/Operator/Purchases.vue");
+        } else {
+          return import("@/views/Login.vue");
+          
+        }
+      }
+     
+    },
+    {
       path: '/purchase',
       name: 'PurchaseConfirm',
       component: () => {
