@@ -9,7 +9,7 @@
       </p>
     </section>
     <section id="main" class="container">
-      <form @submit.prevent="newPurchase">
+      <form @submit.prevent="autOperator">
         <div class="row gtr-50 gtr-uniform">
           <div class="col-8 col-12-mobilep">
             <input
@@ -55,10 +55,7 @@ export default {
     loading,
   },
   methods: {
-    goPay() {
-      window.location.href = this.linkPayment;
-    },
-    async newPurchase() {
+    async autOperator() {
       /*eslint-disable */
       this.show = true;
       let response = await this.$apollo
