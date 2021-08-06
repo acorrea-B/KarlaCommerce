@@ -8,6 +8,7 @@ Backend:
   - Django 3.2.5
   - graphene 2.1.8
   - graphene-django 2.7.0
+  - django-graphql-jwt 0.3.3
  
 FrontEnd:
   - Vue 2.6.12
