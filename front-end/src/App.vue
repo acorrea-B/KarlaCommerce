@@ -1,32 +1,7 @@
 <template>
   <div id="app" class="landing is-preload">
-    <section class="cartProducts">
-      <a href="/shop"> <span class="icon solid major fa-cart-plus"></span></a>
-    </section>
     <router-view />
-    <section id="cta">
-      <h2>Sign up for beta access</h2>
-      <p>
-        Blandit varius ut praesent nascetur eu penatibus nisi risus faucibus
-        nunc.
-      </p>
 
-      <form>
-        <div class="row gtr-50 gtr-uniform">
-          <div class="col-8 col-12-mobilep">
-            <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="Email Address"
-            />
-          </div>
-          <div class="col-4 col-12-mobilep">
-            <input type="submit" value="Sign Up" class="fit" />
-          </div>
-        </div>
-      </form>
-    </section>
     <footer id="footer">
       <ul class="icons">
         <li>
@@ -80,15 +55,17 @@ export default {
 <style lang="scss">
 @import "assets/css/main.css";
 .cartProducts {
-  position: absolute;
+  position: fixed;
+  z-index: 1000000000000;
   top: 1%;
   left: 94%;
 }
 @media only screen and (max-width: 600px) {
   .cartProducts {
-    position: absolute;
-    top: 1%;
-    left: 85%;
+    position: fixed;
+    z-index: 1000000000000;
+    top: 85%;
+    left: 80%;
   }
 }
 </style>

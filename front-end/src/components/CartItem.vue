@@ -1,81 +1,65 @@
 <template>
-  <div class="row cart-item-row">
-    <div class="col-md-6">
-      <Product :product="product" />
+  <section class="box special">
+    <span class="image featured"
+      ><img :src="product.image" alt="" v-if="product.image"/><PuSkeleton v-else
+    /></span>
+    <h3>{{ product.name }}</h3>
+    <p v-if="product.value">Descripcion: {{ product.description }}</p>
+    <PuSkeleton v-else />
+    <p v-if="product.value">Precio: {{ toCurrency(product.value) }}</p>
+    <PuSkeleton v-else />
+    <div>Cantidad: {{ product.amount }}</div>
+
+    <div>
+      <input
+        type="submit"
+        :value="'Eliminar'"
+        class="fit"
+        v-if="product"
+        @click="removeItem()"
+      />
     </div>
-    <div class="col-md-4">
-      <div class="row">
-        <div class="col-md-5">
-          <button @click="changeQuantity()" class="btn btn-primary btn-block">
-            +
-          </button>
-        </div>
-        <div class="col-md-2 text-center">{{ itemQuantity }}</div>
-        <div class="col-md-5">
-          <button
-            @click="changeQuantity('decrease')"
-            class="btn btn-warning btn-block"
-          >
-            -
-          </button>
-        </div>
-      </div>
-      <div class="row cart-remove-button">
-        <div class="col-md-12">
-          <button @click="removeItem()" class="btn btn-danger btn-block">
-            Remove Item
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+  </section>
 </template>
 
 <script>
-import Product from "./Product.vue";
-import { mapState } from "vuex";
 export default {
   name: "CartItem",
   props: ["product"],
-  components: {
-    Product,
-  },
   computed: {
-    ...mapState({
-      cart: (state) => state.cart,
-    }),
+    cart: function() {
+      return this.$store.getters.cart;
+    },
     itemQuantity() {
       let get_product = this.cart.filter((item) => item.id == this.product.id);
       return get_product[0].quantity;
     },
   },
   methods: {
-    changeQuantity(action = "add") {
-      if (action == "add") {
-        this.product.quantity = this.product.quantity + 1;
-        this.$store.commit("updateCartItem", this.product);
-      } else {
-        if (this.product.quantity > 1) {
-          this.product.quantity = this.product.quantity - 1;
-          this.$store.commit("updateCartItem", this.product);
-        } else {
-          //Remove the item
-          this.$store.commit("removeCartItem", this.product);
-        }
-      }
+    toCurrency(value) {
+      return (
+        "$ " + value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,") + " COP"
+      );
     },
     removeItem() {
       this.$store.commit("removeCartItem", this.product);
+      this.cart;
     },
   },
 };
 </script>
 <style scoped>
-.cart-item-row {
-  border-bottom: 1px solid #ccc;
-  margin-top: 20px;
+.purchaseDetail {
+  padding: 6% 2%;
+  text-align: center;
+  position: inherit;
+  background-color: #ffffff;
 }
-.cart-remove-button {
-  margin-top: 10px;
+.purchase h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #fff;
 }
 </style>

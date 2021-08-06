@@ -1971,22 +1971,6 @@ body.landing {
       }
     }
   }
-
-  body {
-    &.navPanel-visible {
-      #page-wrapper {
-        @include vendor("transform", "translateX(#{_size(navPanel)})");
-      }
-
-      #navButton {
-        @include vendor("transform", "translateX(#{_size(navPanel)})");
-      }
-
-      #navPanel {
-        @include vendor("transform", "translateX(0)");
-      }
-    }
-  }
 }
 
 /* Mobile */
