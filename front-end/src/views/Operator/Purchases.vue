@@ -6,7 +6,10 @@
     </section>
 
     <section id="main" class="container">
-      <div class="row">
+      <div v-if="!purchases[0]">
+        <H3>Aun no contamos con compras registradas</H3>
+      </div>
+      <div v-else class="row">
         <div
           class="col-5 col-12-narrower"
           v-for="(item, purchase) in purchases"

@@ -4,7 +4,7 @@
     <p>Accesorios para dama y caballero.</p>
     <ul class="actions special">
       <li><a href="/products" class="button primary">Comprar</a></li>
-      <li><a href="/" class="button">Log in</a></li>
+      <li><a href="/login" class="button">Log in</a></li>
     </ul>
   </section>
 </template>
