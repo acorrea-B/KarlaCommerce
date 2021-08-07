@@ -2,7 +2,7 @@
   <section class="box special">
     <h3 v-if="purchase.id">{{ toCurrency(purchase.totalValue) }}</h3>
     <PuSkeleton v-else />
-    <p v-if="purchase.state">Estado de la compra: {{ purchase.state }}</p>
+    <p v-if="purchase.state">Estado de la compra: {{ state }}</p>
     <PuSkeleton v-else />
     <p v-if="purchase.purchaseDate">
       Fecha de la compra: {{ purchase.purchaseDate }}
@@ -24,6 +24,14 @@
         v-if="purchase.state == 'paid'"
         @click="refund()"
       />
+      <input
+        v-else
+        type="submit"
+        :value="'Reembolsar'"
+        class="fit"
+        disabled
+        @click="refund()"
+      />
     </div>
   </section>
 </template>
@@ -39,6 +47,15 @@ export default {
   computed: {
     items: function() {
       return this.purchase.products.edges.length;
+    },
+    state: function() {
+      let states = {
+        created: "Pendiente de pago",
+        reverted: "Pago reembolsado",
+        pending: "Pendiente de pago",
+        paid: "Pago realizado",
+      };
+      return states[this.purchase.state];
     },
   },
   methods: {
