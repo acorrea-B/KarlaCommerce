@@ -18,8 +18,7 @@ class PurchaseQuery(graphene.ObjectType):
             Este resolve retorna el estado actualizado de
             de una compra
         """
-        product_id = base64.b64decode(purchase_id).decode("utf8").split(':')[1]
-        id =  uuid.UUID(product_id)
+        id =  uuid.UUID(purchase_id)
         error, purchase = Purchases().confirm_purchase_payment(id)
         if not error:                                                   
             return purchase

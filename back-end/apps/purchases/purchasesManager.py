@@ -52,7 +52,7 @@ class Purchases:
             Retorna:
                 purchases(list - [])
         """
-        return PurchaseModel.objects.all()
+        return PurchaseModel.objects.all().order_by("-id")
     
     def confirm_purchase_payment(self, purchase_id):
         """

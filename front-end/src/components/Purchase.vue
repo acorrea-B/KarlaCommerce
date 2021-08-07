@@ -16,7 +16,6 @@
     <PuSkeleton v-else />
     <br />
     <br />
-    {{ purchase.id }}
     <div class="col-8 col-12-mobilep">
       <input
         type="submit"

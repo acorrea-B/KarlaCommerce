@@ -95,13 +95,13 @@ WSGI_APPLICATION = 'karlaCommerce.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-"""DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
-}"""
-DATABASES = {
+}
+"""DATABASES = {
 
     'default': {
 
@@ -119,7 +119,7 @@ DATABASES = {
 
     }
 
-}
+}"""
 
 
 # Password validation
@@ -183,5 +183,5 @@ IMAGES_BUCKET="karla-products"
 AUTH_USER_MODEL = 'users.User'
 COMMERCE = "backend-alejandro-correa"
 PASSWORDCOMMERCE = "sTbkfTmG7wNrRn78"
-WEBCLIENT = "https://localhost:8080/purchasepayment?purchase="
+WEBCLIENT = "https://klcmpopayan.com/purchasepayment?purchase="
 

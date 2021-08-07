@@ -10,7 +10,8 @@ import VueApollo from 'vue-apollo'
 // HTTP connection to the API
 const httpLink = createHttpLink({
   // You should use an absolute URL here
-  uri: 'https://services.klcmpopayan.com/api/',
+  //uri: 'https://services.klcmpopayan.com/api/',
+  uri: 'http://127.0.0.1:8000/api/',
 })
 // Error Handling
 
