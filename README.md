@@ -17,10 +17,13 @@ FrontEnd:
 Server:
   - Aws Ec2 ubuntu 20.04
   - Nginx
-  - Daphne
+  - Gunicorn
+  - Cerbot
 
 BD:
   - postgres
   
  Tiempo estimado de desarrollo: 32 horas
+ 
+ Tiempo total del desarrollo: 45 horas 
 
